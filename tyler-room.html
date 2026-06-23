@@ -146,21 +146,40 @@
 
   function buildData(get, roomId) {
     const SECTIONS = {
-      'Accessibility & Environment': [
-        { label: 'Assistive Listening Device',      html: yn(get('assistive listening device')) },
-        { label: 'Environmental Controls (Lighting)',html: yn(get('dimmable lighting')) },
-        { label: 'Height adjustable desk/podium',   html: (() => {
-            if (!/^yes/i.test(get('height-adjustable desk/podium'))) return 'No';
-            const lvl = get('level 2 podium or level 3 podium');
-            const note = lvl && lvl !== 'N/A' ? lvl.replace(/level/i, 'Level') : '';
-            return note ? withModel('Yes', note + ' podium') : 'Yes';
+      'Instructor Video': [
+        { label: 'Web Conference Camera (PC)', html: yn(get('web camera')) },
+        { label: 'Instructor Camera',          html: yn(get('instructor camera model')) },
+        { label: 'Audience Camera',            html: yn(get('audience camera model')) },
+        { label: 'Document Camera',            html: yn(get('document camera')) },
+        { label: 'Projectors',                 html: (() => {
+            const n = get('number of projectors');
+            const m = get('projector model');
+            if (!n || n === '0') return '0';
+            return withModel(n, m);
           })() },
-        { label: 'Stage',                           html: yn(get('stage')) },
-        { label: 'Privacy panel for teacher desk',  html: yn(get('privacy panel for teacher desk')) },
-        { label: 'Windows in classroom',            html: yn(get('windows in classroom')) },
-        { label: 'Door with window',                html: yn(get('door with window')) },
+        { label: 'Instructor Presentation LED/LCD Display', html: (() => {
+            const m = get('display model and size');
+            return m ? withModel('Yes', m) : 'No';
+          })() },
+        { label: 'Smart Touchscreen Display',  html: 'No' },
+        { label: 'Wireless Presentation',      html: (() => {
+            const v = get('wireless presentation (appletv, kramer, screenbeam)');
+            return /appletv/i.test(v) ? 'Apple TV' : (titleCase(v) || 'No');
+          })() },
+        { label: 'Instructor Interactive Computer Monitor', html: (() => {
+            const v = get('interactive monitor model and size');
+            return (!v || /^no$/i.test(v)) ? 'No' : titleCase(v);
+          })() },
+        { label: 'Instructor Computer Monitor', html: modelField(get('computer monitor model and size')) },
+        { label: 'Class Capture (Panopto)',    html: 'No' },
+        { label: 'Operating System',           html: (() => {
+            const v = get('pc or mac');
+            if (/imac/i.test(v))     return 'MacOS (Apple iMac)';
+            if (/mac mini/i.test(v)) return 'MacOS (Apple Mac Mini)';
+            return titleCase(v);
+          })() },
       ],
-      'Audio': [
+      'Classroom Audio': [
         { label: 'Voice Amplification (Speakers)',        html: yn(get('number of wall mounted speakers')) },
         { label: 'Podium Microphone',                     html: modelField(get('podium microphone model')) },
         { label: 'Ceiling Microphone',                    html: (() => {
@@ -172,40 +191,19 @@
         { label: 'Wireless Lavalier Microphone (Clip-on)',html: modelField(get('wireless lavalier microphone')) },
         { label: 'Handheld Microphone',                   html: yn(get('wireless handheld microphone model')) },
       ],
-      'Video': [
-        { label: 'Web Conference Camera (PC)', html: yn(get('web camera')) },
-        { label: 'Instructor Camera',          html: yn(get('instructor camera model')) },
-        { label: 'Audience Camera',            html: yn(get('audience camera model')) },
-        { label: 'Document Camera',            html: yn(get('document camera')) },
-        { label: 'Projectors',                 html: (() => {
-            const n = get('number of projectors');
-            const m = get('projector model');
-            if (!n || n === '0') return '0';
-            return withModel(n, m);
+      'Accessibility & Environment': [
+        { label: 'Assistive Listening Device',        html: yn(get('assistive listening device')) },
+        { label: 'environmental control touch panel', html: yn(get('dimmable lighting')) },
+        { label: 'Height adjustable desk/podium',     html: (() => {
+            if (!/^yes/i.test(get('height-adjustable desk/podium'))) return 'No';
+            const lvl = get('level 2 podium or level 3 podium');
+            const note = lvl && lvl !== 'N/A' ? lvl.replace(/level/i, 'Level') : '';
+            return note ? withModel('Yes', note + ' podium') : 'Yes';
           })() },
-        { label: 'LED/LCD Display',            html: (() => {
-            const m = get('display model and size');
-            return m ? withModel('Yes', m) : 'No';
-          })() },
-      ],
-      'Presentation': [
-        { label: 'Wireless Presentation', html: (() => {
-            const v = get('wireless presentation (appletv, kramer, screenbeam)');
-            return /appletv/i.test(v) ? 'Apple TV' : (titleCase(v) || 'No');
-          })() },
-        { label: 'Interactive Monitor',   html: (() => {
-            const v = get('interactive monitor model and size');
-            return (!v || /^no$/i.test(v)) ? 'No' : titleCase(v);
-          })() },
-        { label: 'Instructor Monitor',    html: modelField(get('computer monitor model and size')) },
-        { label: 'Class Capture (Panopto)', html: 'No' },
-        { label: 'Operating System',      html: (() => {
-            const v = get('pc or mac');
-            if (/imac/i.test(v))     return 'MacOS (Apple iMac)';
-            if (/mac mini/i.test(v)) return 'MacOS (Apple Mac Mini)';
-            return titleCase(v);
-          })() },
-        { label: 'Smart Touchscreen Presentation', html: 'No' },
+        { label: 'Stage',                             html: yn(get('stage')) },
+        { label: 'Privacy panel for teacher desk',    html: yn(get('privacy panel for teacher desk')) },
+        { label: 'Windows in classroom',              html: yn(get('windows in classroom')) },
+        { label: 'Door with window',                  html: yn(get('door with window')) },
       ],
       'Boards': [
         { label: 'Chalkboards', html: /^yes/i.test(get('chalkboard')) ? '1' : '0' },
