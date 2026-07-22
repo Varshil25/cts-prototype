@@ -161,7 +161,7 @@
             const m = get('display model and size');
             return m ? withModel('Yes', m) : 'No';
           })() },
-        { label: 'Smart Touchscreen Display',  html: 'No' },
+        { label: 'Instructor Touchscreen Display',  html: 'No' },
         { label: 'Wireless Presentation',      html: (() => {
             const v = get('wireless presentation (appletv, kramer, screenbeam)');
             return /appletv/i.test(v) ? 'Apple TV' : (titleCase(v) || 'No');
