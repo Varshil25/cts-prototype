@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <title>BioLife Room – CTS Classrooms</title>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md navbar-light bg-white border-bottom shadow-sm sticky-top">
+  <div class="container">
+    <a class="navbar-brand fw-semibold" href="index.html">CTS Classrooms</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="mainNav" class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Buildings</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container my-4">
+
+  <nav aria-label="breadcrumb" class="mb-1">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="index.html">Buildings</a></li>
+      <li class="breadcrumb-item"><a href="biolife.html">BioLife</a></li>
+      <li class="breadcrumb-item active" id="breadcrumbRoom"></li>
+    </ol>
+  </nav>
+
+  <h1 class="h4 text-center mb-3" id="roomTitle"></h1>
+
+  <div class="row g-3">
+
+    <aside class="col-12 col-lg-3 order-2 order-lg-1">
+      <div class="detail-sidebar" id="detailSidebar">
+        <div class="text-muted small" id="noPhotosMsg">No photos available.</div>
+      </div>
+    </aside>
+
+    <section class="col-12 col-lg-9 order-1 order-lg-2" id="mainContent">
+
+      <div id="pano-wrap">
+        <span style="font-size:.9rem;">No 360° panorama available</span>
+      </div>
+
+      <div class="d-flex flex-wrap gap-2 my-3" id="highlightsWrap"></div>
+
+      <div class="row g-3 mb-2">
+        <div class="col-12 col-md-6">
+          <div class="p-3 border rounded-3 h-100">
+            <div class="kv-row"><div class="k">Location</div><div class="v" id="kfLocation"></div></div>
+            <div class="kv-row"><div class="k">Campus</div><div class="v" id="kfCampus"></div></div>
+            <div class="kv-row"><div class="k">Capacity</div><div class="v" id="kfCapacity"></div></div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="p-3 border rounded-3 h-100">
+            <div class="kv-row"><div class="k">Seating type</div><div class="v" id="kfSeating"></div></div>
+            <div class="kv-row"><div class="k">Instructor PC</div><div class="v" id="kfInstructor"></div></div>
+            <div class="kv-row"><div class="k">Recording</div><div class="v" id="kfRecording"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion feature-accordion mb-3" id="featAcc"></div>
+
+      <div class="d-flex flex-wrap gap-2 justify-content-end">
+        <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#techModal">
+          Tech support
+        </button>
+      </div>
+
+      <div class="modal fade" id="techModal" tabindex="-1" aria-labelledby="techModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="techModalLabel">Tech Support – BioLife</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p class="text-muted">Tech contact information not yet available.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+<script>
+(function () {
+  const ROOM_IMAGES = {
+    '113': { dir: 'BioLife/1st Floor/113', files: ['AS7A4872.JPG','AS7A4878.JPG','AS7A4883.JPG','AS7A4886.JPG','AS7A4889.JPG','AS7A4895.JPG','AS7A4898.JPG'] },
+    '332': { dir: 'BioLife/3rd Floor/332', files: ['AS7A4845.JPG','AS7A4848.JPG','AS7A4849.JPG','AS7A4850.JPG','AS7A4852.JPG','AS7A4853.JPG','AS7A4856.JPG'] },
+    '342': { dir: 'BioLife/3rd Floor/342', files: ['AS7A4857.JPG','AS7A4863.JPG','AS7A4864.JPG','AS7A4865.JPG','AS7A4867.JPG','AS7A4868.JPG','AS7A4869.JPG','AS7A4871.JPG'] },
+  };
+
+  function imgSrc(dir, file) {
+    return encodeURI(dir + '/' + file);
+  }
+
+  function setupImages(roomId) {
+    const data = ROOM_IMAGES[roomId.toLowerCase()];
+    if (!data || !data.files.length) return;
+
+    const noPhotosMsg = document.getElementById('noPhotosMsg');
+    if (noPhotosMsg) noPhotosMsg.remove();
+
+    const panoWrap = document.getElementById('pano-wrap');
+    const sidebar  = document.getElementById('detailSidebar');
+
+    const defaultIdx = data.files.length - 1;
+
+    const mainImg = document.createElement('img');
+    mainImg.id = 'mainImg';
+    mainImg.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;';
+    mainImg.src = imgSrc(data.dir, data.files[defaultIdx]);
+    mainImg.alt = '';
+    panoWrap.innerHTML = '';
+    panoWrap.appendChild(mainImg);
+
+    data.files.forEach((file, i) => {
+      const thumb = document.createElement('img');
+      thumb.src = imgSrc(data.dir, file);
+      thumb.alt = '';
+      if (i === defaultIdx) thumb.classList.add('active-thumb');
+      thumb.addEventListener('click', () => {
+        mainImg.src = thumb.src;
+        sidebar.querySelectorAll('img').forEach(t => t.classList.remove('active-thumb'));
+        thumb.classList.add('active-thumb');
+      });
+      sidebar.appendChild(thumb);
+    });
+  }
+
+  const room = new URLSearchParams(location.search).get('room');
+  if (!room) { showError(); return; }
+
+  fetch('classroom_inventory(BioLife).csv')
+    .then(r => { if (!r.ok) throw new Error(); return r.text(); })
+    .then(text => {
+      const { data } = Papa.parse(text, { skipEmptyLines: false });
+      const header = data[0];
+      const col = header.findIndex((h, i) => {
+        if (i <= 0) return false;
+        const stripped = h.replace(/^BIOSCI_0*/i, '').toLowerCase();
+        if (stripped === room.toLowerCase()) return true;
+        // Sheet lists this room as BIOSCI_00133, but the photographed folder
+        // (and every other room in this app) is keyed by the physical room
+        // number, which is 113 here. Flagged for the data owner to confirm.
+        if (room.toLowerCase() === '113' && stripped === '133') return true;
+        return false;
+      });
+      if (col === -1) { showError(); return; }
+
+      const csvMap = new Map();
+      for (const row of data.slice(1)) {
+        const key = (row[0] || '').trim().toLowerCase();
+        if (key && !csvMap.has(key)) csvMap.set(key, (row[col] || '').trim());
+      }
+      const get = k => csvMap.get(k.toLowerCase()) ?? '';
+
+      render(buildData(get, room));
+      setupImages(room);
+    })
+    .catch(showError);
+
+  function titleCase(s) {
+    return s.toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
+  }
+
+  function yn(v) {
+    return /^yes/i.test(v) ? 'Yes' : 'No';
+  }
+
+  // this sheet mixes "N/A", "n/a", bare "NA", and "None" for blank/absent values
+  function isBlankish(v) {
+    return !v || /^(no|n\/?a|none)$/i.test(v.trim());
+  }
+
+  function withModel(primary, modelStr) {
+    const m = modelStr && !isBlankish(modelStr) ? titleCase(modelStr) : '';
+    return m
+      ? `${primary} &nbsp;<small class="text-muted fw-normal">(${m})</small>`
+      : primary;
+  }
+
+  function modelField(v) {
+    if (isBlankish(v)) return 'No';
+    return withModel('Yes', v);
+  }
+
+  // some "model" fields in this sheet are actually bare yes/no flags
+  // (e.g. Document Camera) rather than a real model name — avoid rendering
+  // a bogus "Yes (Yes)".
+  function boolOrModel(v) {
+    if (isBlankish(v)) return 'No';
+    if (/^yes$/i.test(v.trim())) return 'Yes';
+    return withModel('Yes', v);
+  }
+
+  function countOrYes(v) {
+    if (/^yes/i.test(v)) return 'Yes';
+    if (isBlankish(v) || v.trim() === '0') return 'No';
+    const n = parseInt(v, 10);
+    return (!isNaN(n) && n > 0) ? 'Yes' : 'No';
+  }
+
+  function buildData(get, roomId) {
+    const appleTV     = /^yes$/i.test(get('wireless presentation (appletv)'));
+    const kramer      = /^yes$/i.test(get('wireless presentation (kramer)'));
+    const screenbeam  = /^yes$/i.test(get('wireless presentation (screenbeam)'));
+
+    const wirelessParts = [];
+    if (appleTV)    wirelessParts.push('Apple TV');
+    if (kramer)     wirelessParts.push('Kramer');
+    if (screenbeam) wirelessParts.push('ScreenBeam');
+    const wirelessDisplay = wirelessParts.length ? wirelessParts.join(' + ') : 'No';
+
+    const instructorCamModel = get('instructor camera model');
+    const hasInstructorCam = !isBlankish(instructorCamModel);
+
+    // Audience camera is a separate boolean flag from its (always-blank) model here
+    const audienceCamFlag  = get('audience camera');
+    const audienceCamModel = get('audience camera model');
+    const hasAudienceCam = !isBlankish(audienceCamFlag);
+    const audienceCamDisplay = hasAudienceCam
+      ? (!isBlankish(audienceCamModel) ? withModel('Yes', audienceCamModel) : boolOrModel(audienceCamFlag))
+      : 'No';
+
+    const ceilingMicModel = get('ceiling microphone model');
+    const hasCeilingMic = !isBlankish(ceilingMicModel);
+
+    const displayModel = get('instructional display model and size');
+    const hasDisplay = !isBlankish(displayModel);
+
+    const interactiveDisplayModel = get('instructional interactive display model and size');
+    const hasInteractiveDisplay = !isBlankish(interactiveDisplayModel);
+
+    const lavalierModel = get('wireless lavalier microphone model');
+    const hasLavalier = !isBlankish(lavalierModel);
+
+    // Recording: this sheet's Class Capture rows are entirely blank for
+    // every BioLife room, so this naturally resolves to "No" throughout.
+    const classCaptureFlag  = get('class capture system');
+    const classCaptureModel = get('class capture system model');
+    const hasClassCapture = !isBlankish(classCaptureFlag);
+    const classCaptureDisplay = (() => {
+      if (!hasClassCapture) return 'No';
+      if (!isBlankish(classCaptureModel)) return withModel('Yes', classCaptureModel);
+      return withModel('Yes', classCaptureFlag);
+    })();
+
+    const SECTIONS = {
+      'Instructor Video': [
+        { label: 'Web Conference Camera (PC)', html: yn(get('web camera')) },
+        { label: 'Instructor Camera',          html: hasInstructorCam ? withModel('Yes', instructorCamModel) : 'No' },
+        { label: 'Audience Camera',            html: audienceCamDisplay },
+        { label: 'Document Camera',            html: boolOrModel(get('document camera')) },
+        { label: 'Projectors',                 html: (() => {
+            const n = get('number of projectors');
+            const m = get('projector model');
+            if (!n || n === '0') return '0';
+            return withModel(n, m);
+          })() },
+        { label: 'Instructor Presentation LED/LCD Display', html: hasDisplay ? withModel('Yes', displayModel) : 'No' },
+        { label: 'Instructor Touchscreen Display',  html: hasInteractiveDisplay ? withModel('Yes', interactiveDisplayModel) : 'No' },
+        { label: 'Wireless Presentation',      html: wirelessDisplay },
+        { label: 'Instructor Interactive Computer Monitor', html: (() => {
+            const v = get('interactive computer monitor model and size');
+            return isBlankish(v) ? 'No' : titleCase(v);
+          })() },
+        { label: 'Instructor Computer Monitor', html: modelField(get('computer monitor model and size')) },
+        { label: 'Class Capture (Panopto)',    html: classCaptureDisplay },
+        { label: 'Operating System',           html: (() => {
+            const v = get('pc or mac');
+            if (/imac/i.test(v))     return 'MacOS (Apple iMac)';
+            if (/mac mini/i.test(v)) return 'MacOS (Apple Mac Mini)';
+            return titleCase(v);
+          })() },
+      ],
+      'Classroom Audio': [
+        { label: 'Voice Amplification (Speakers)',        html: (() => {
+            const wall = get('number of wall mounted speakers');
+            const ceil = get('number of ceiling mounted speakers');
+            const hasWall = wall && wall !== '0' && !/^(no|none)$/i.test(wall);
+            const hasCeil = ceil && ceil !== '0' && !/^(no|none)$/i.test(ceil);
+            return (hasWall || hasCeil) ? 'Yes' : 'No';
+          })() },
+        { label: 'Podium Microphone',                     html: modelField(get('podium microphones model')) },
+        { label: 'Ceiling Microphone',                    html: hasCeilingMic ? withModel('Yes', ceilingMicModel) : 'No' },
+        { label: 'Wireless Lavalier Microphone (Clip-on)',html: hasLavalier ? withModel('Yes', lavalierModel) : 'No' },
+        { label: 'Handheld Microphone',                   html: countOrYes(get('number of wireless handheld microphones')) },
+      ],
+      'Accessibility & Environment': [
+        { label: 'Assistive Listening Device',        html: yn(get('assistive listening device')) },
+        { label: 'Environmental control touch panel', html: yn(get('environmental controls in the touch panel')) },
+        { label: 'Height adjustable desk/podium',     html: (() => {
+            if (!/^yes/i.test(get('height-adjustable desk/podium'))) return 'No';
+            const model = get('height-adjustable desk/podium model');
+            return !isBlankish(model) ? withModel('Yes', model) : 'Yes';
+          })() },
+        { label: 'Stage',                             html: yn(get('stage')) },
+        { label: 'Privacy panel for teacher desk',    html: yn(get('privacy panel for teacher desk')) },
+        { label: 'Windows in classroom',              html: yn(get('windows in classroom')) },
+        { label: 'Door with window',                  html: yn(get('entry door with window')) },
+      ],
+      'Boards': [
+        { label: 'Chalkboards', html: /^yes/i.test(get('chalkboard')) ? '1' : '0' },
+        { label: 'Whiteboards', html: /^yes/i.test(get('whiteboard'))  ? '1' : '0' },
+      ],
+    };
+
+    const highlights = [];
+    if (appleTV)          highlights.push({ icon: 'bi-stars',           label: 'Wireless: Apple TV' });
+    if (kramer)            highlights.push({ icon: 'bi-broadcast',       label: 'Wireless: Kramer' });
+    if (hasInstructorCam)   highlights.push({ icon: 'bi-camera-video',    label: 'Instructor Camera' });
+    if (hasAudienceCam)     highlights.push({ icon: 'bi-camera-video',    label: 'Audience Camera' });
+    if (/^yes$/i.test(get('web camera')))
+                            highlights.push({ icon: 'bi-camera-video-fill', label: 'Web Conference Camera' });
+    if (hasLavalier)        highlights.push({ icon: 'bi-mic',             label: 'Wireless Lavalier Mic' });
+    if (hasClassCapture)    highlights.push({ icon: 'bi-record-circle',   label: 'Class Capture' });
+
+    const instructorPC = (() => {
+      const v = get('pc or mac');
+      if (/imac/i.test(v))     return 'MacOS (Apple iMac)';
+      if (/mac mini/i.test(v)) return 'MacOS (Apple Mac Mini)';
+      return titleCase(v);
+    })();
+
+    return {
+      roomNumber: roomId.toUpperCase(),
+      building: 'BioLife',
+      campus: 'Main Campus',
+      capacity: get('capacity'),
+      seatingType: titleCase(get('seating type (tables and chairs, tablet armchairs, auditorium chairs)')),
+      instructorPC,
+      recording: classCaptureDisplay,
+      highlights,
+      sections: SECTIONS,
+    };
+  }
+
+  function escHtml(s) {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function render(d) {
+    document.title = `BioLife ${d.roomNumber} – CTS Classrooms`;
+    document.getElementById('roomTitle').textContent = `${d.building} ${d.roomNumber}`;
+    document.getElementById('breadcrumbRoom').textContent = d.roomNumber;
+
+    document.getElementById('highlightsWrap').innerHTML = d.highlights
+      .map(h => `<span class="chip"><i class="bi ${h.icon}"></i>${h.label}</span>`)
+      .join('');
+
+    document.getElementById('kfLocation').textContent   = d.building;
+    document.getElementById('kfCampus').textContent     = d.campus;
+    document.getElementById('kfCapacity').textContent   = d.capacity;
+    document.getElementById('kfSeating').textContent    = d.seatingType;
+    document.getElementById('kfInstructor').textContent = d.instructorPC;
+    document.getElementById('kfRecording').innerHTML    = d.recording;
+
+    const acc = document.getElementById('featAcc');
+    acc.innerHTML = Object.entries(d.sections).map(([name, items], i) => {
+      const id = `acc${i + 1}`;
+      const isFirst = i === 0;
+      return `
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button${isFirst ? '' : ' collapsed'}" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#${id}">
+              ${escHtml(name)}
+            </button>
+          </h2>
+          <div id="${id}" class="accordion-collapse collapse${isFirst ? ' show' : ''}">
+            <div class="accordion-body">
+              <div class="row row-cols-1 row-cols-sm-2 g-2">
+                ${items.map(item => `
+                  <div class="col"><div class="border rounded-3 p-2 h-100">
+                    <div class="small text-muted">${item.label}</div>
+                    <div class="fw-semibold mt-1">${item.html}</div>
+                  </div></div>`).join('')}
+              </div>
+            </div>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  function showError() {
+    const main = document.getElementById('mainContent');
+    if (main) main.innerHTML =
+      '<p class="text-muted mt-3">Room not found. <a href="biolife.html">Back to BioLife rooms</a></p>';
+  }
+})();
+</script>
+</body>
+</html>

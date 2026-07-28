@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <title>Beury Room – CTS Classrooms</title>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md navbar-light bg-white border-bottom shadow-sm sticky-top">
+  <div class="container">
+    <a class="navbar-brand fw-semibold" href="index.html">CTS Classrooms</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="mainNav" class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Buildings</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container my-4">
+
+  <nav aria-label="breadcrumb" class="mb-1">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="index.html">Buildings</a></li>
+      <li class="breadcrumb-item"><a href="beury.html">Beury Hall</a></li>
+      <li class="breadcrumb-item active" id="breadcrumbRoom"></li>
+    </ol>
+  </nav>
+
+  <h1 class="h4 text-center mb-3" id="roomTitle"></h1>
+
+  <div class="row g-3">
+
+    <aside class="col-12 col-lg-3 order-2 order-lg-1">
+      <div class="detail-sidebar" id="detailSidebar">
+        <div class="text-muted small" id="noPhotosMsg">No photos available.</div>
+      </div>
+    </aside>
+
+    <section class="col-12 col-lg-9 order-1 order-lg-2" id="mainContent">
+
+      <div id="pano-wrap">
+        <span style="font-size:.9rem;">No 360° panorama available</span>
+      </div>
+
+      <div class="d-flex flex-wrap gap-2 my-3" id="highlightsWrap"></div>
+
+      <div class="row g-3 mb-2">
+        <div class="col-12 col-md-6">
+          <div class="p-3 border rounded-3 h-100">
+            <div class="kv-row"><div class="k">Location</div><div class="v" id="kfLocation"></div></div>
+            <div class="kv-row"><div class="k">Campus</div><div class="v" id="kfCampus"></div></div>
+            <div class="kv-row"><div class="k">Capacity</div><div class="v" id="kfCapacity"></div></div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="p-3 border rounded-3 h-100">
+            <div class="kv-row"><div class="k">Seating type</div><div class="v" id="kfSeating"></div></div>
+            <div class="kv-row"><div class="k">Instructor PC</div><div class="v" id="kfInstructor"></div></div>
+            <div class="kv-row"><div class="k">Recording</div><div class="v" id="kfRecording"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion feature-accordion mb-3" id="featAcc"></div>
+
+      <div class="d-flex flex-wrap gap-2 justify-content-end">
+        <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#techModal">
+          Tech support
+        </button>
+      </div>
+
+      <div class="modal fade" id="techModal" tabindex="-1" aria-labelledby="techModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="techModalLabel">Tech Support – Beury Hall</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p class="text-muted">Tech contact information not yet available.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+<script>
+(function () {
+  const ROOM_IMAGES = {
+    '119': { dir: 'Beury/1st Floor/119', files: ['AS7A4923.JPG','AS7A4924.JPG','AS7A4925.JPG','AS7A4926.JPG','AS7A4932.JPG','AS7A4934.JPG','AS7A4935.JPG'] },
+    '120': { dir: 'Beury/1st Floor/120', files: ['AS7A4936.JPG','AS7A4937.JPG','AS7A4939.JPG','AS7A4941.JPG','AS7A4944.JPG','AS7A4945.JPG','AS7A4946.JPG','AS7A4947.JPG'] },
+    '413': { dir: 'Beury/4th Floor/413', files: ['AS7A4899.JPG','AS7A4902.JPG','AS7A4903.JPG','AS7A4904.JPG','AS7A4905.JPG','AS7A4906.JPG','AS7A4907.JPG','AS7A4910.JPG'] },
+    '415': { dir: 'Beury/4th Floor/415', files: ['AS7A4911.JPG','AS7A4912.JPG','AS7A4913.JPG','AS7A4915.JPG','AS7A4916.JPG','AS7A4917.JPG','AS7A4920.JPG','AS7A4921.JPG','AS7A4922.JPG'] },
+  };
+
+  function imgSrc(dir, file) {
+    return encodeURI(dir + '/' + file);
+  }
+
+  function setupImages(roomId) {
+    const data = ROOM_IMAGES[roomId.toLowerCase()];
+    if (!data || !data.files.length) return;
+
+    const noPhotosMsg = document.getElementById('noPhotosMsg');
+    if (noPhotosMsg) noPhotosMsg.remove();
+
+    const panoWrap = document.getElementById('pano-wrap');
+    const sidebar  = document.getElementById('detailSidebar');
+
+    const defaultIdx = data.files.length - 1;
+
+    const mainImg = document.createElement('img');
+    mainImg.id = 'mainImg';
+    mainImg.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;';
+    mainImg.src = imgSrc(data.dir, data.files[defaultIdx]);
+    mainImg.alt = '';
+    panoWrap.innerHTML = '';
+    panoWrap.appendChild(mainImg);
+
+    data.files.forEach((file, i) => {
+      const thumb = document.createElement('img');
+      thumb.src = imgSrc(data.dir, file);
+      thumb.alt = '';
+      if (i === defaultIdx) thumb.classList.add('active-thumb');
+      thumb.addEventListener('click', () => {
+        mainImg.src = thumb.src;
+        sidebar.querySelectorAll('img').forEach(t => t.classList.remove('active-thumb'));
+        thumb.classList.add('active-thumb');
+      });
+      sidebar.appendChild(thumb);
+    });
+  }
+
+  const room = new URLSearchParams(location.search).get('room');
+  if (!room) { showError(); return; }
+
+  fetch('classroom_inventory(Beury).csv')
+    .then(r => { if (!r.ok) throw new Error(); return r.text(); })
+    .then(text => {
+      const { data } = Papa.parse(text, { skipEmptyLines: false });
+      const header = data[0];
+      const col = header.findIndex((h, i) =>
+        i > 0 && h.replace(/^BEURY_0*/i, '').toLowerCase() === room.toLowerCase()
+      );
+      if (col === -1) { showError(); return; }
+
+      const csvMap = new Map();
+      for (const row of data.slice(1)) {
+        const key = (row[0] || '').trim().toLowerCase();
+        if (key && !csvMap.has(key)) csvMap.set(key, (row[col] || '').trim());
+      }
+      const get = k => csvMap.get(k.toLowerCase()) ?? '';
+
+      render(buildData(get, room));
+      setupImages(room);
+    })
+    .catch(showError);
+
+  function titleCase(s) {
+    return s.toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
+  }
+
+  function yn(v) {
+    return /^yes/i.test(v) ? 'Yes' : 'No';
+  }
+
+  function withModel(primary, modelStr) {
+    const m = modelStr && !/^(no|n\/a|none)$/i.test(modelStr) ? titleCase(modelStr) : '';
+    return m
+      ? `${primary} &nbsp;<small class="text-muted fw-normal">(${m})</small>`
+      : primary;
+  }
+
+  function modelField(v) {
+    if (!v || /^(no|n\/a|none)$/i.test(v)) return 'No';
+    return withModel('Yes', v);
+  }
+
+  // "number of X" fields in this sheet mix literal YES/NO with actual counts
+  function countOrYes(v) {
+    if (/^yes/i.test(v)) return 'Yes';
+    if (!v || v === '0' || /^(no|n\/a|none)$/i.test(v)) return 'No';
+    const n = parseInt(v, 10);
+    return (!isNaN(n) && n > 0) ? 'Yes' : 'No';
+  }
+
+  function buildData(get, roomId) {
+    const appleTV   = /^yes$/i.test(get('wireless presentation (appletv)'));
+    const kramer    = /^yes$/i.test(get('wireless presentation (kramer)'));
+    const screenbeam= /^yes$/i.test(get('wireless presentation (screenbeam)'));
+
+    const wirelessParts = [];
+    if (appleTV)    wirelessParts.push('Apple TV');
+    if (kramer)     wirelessParts.push('Kramer');
+    if (screenbeam) wirelessParts.push('ScreenBeam');
+    const wirelessDisplay = wirelessParts.length ? wirelessParts.join(' + ') : 'No';
+
+    const hasInstructorCam = /^yes/i.test(get('instructor camera'));
+
+    const audienceCamModel = get('audience camera model');
+    const hasAudienceCam = audienceCamModel && !/^(no|n\/a|none)$/i.test(audienceCamModel);
+
+    const ceilingMicModel = get('ceiling microphone model');
+    const hasCeilingMic = ceilingMicModel && !/^(no|n\/a|none)$/i.test(ceilingMicModel);
+
+    const displayModel = get('instructional display model and size');
+    const hasDisplay = displayModel && !/^(n\/a|no|none)$/i.test(displayModel);
+
+    const lavalierModel = get('wireless lavalier microphone model');
+    const hasLavalier = lavalierModel && !/^(no|n\/a|none)$/i.test(lavalierModel);
+
+    const SECTIONS = {
+      'Instructor Video': [
+        { label: 'Web Conference Camera (PC)', html: yn(get('web camera')) },
+        { label: 'Instructor Camera',          html: hasInstructorCam ? 'Yes' : 'No' },
+        { label: 'Audience Camera',            html: hasAudienceCam ? withModel('Yes', audienceCamModel) : 'No' },
+        { label: 'Document Camera',            html: countOrYes(get('document camera')) },
+        { label: 'Projectors',                 html: (() => {
+            const n = get('number of projectors');
+            const m = get('projector model');
+            if (!n || n === '0') return '0';
+            return withModel(n, m);
+          })() },
+        { label: 'Instructor Presentation LED/LCD Display', html: hasDisplay ? withModel('Yes', displayModel) : 'No' },
+        { label: 'Instructor Touchscreen Display',  html: (() => {
+            const v = get('instructional interactive display model and size');
+            return (!v || /^(n\/a|no|none)$/i.test(v)) ? 'No' : withModel('Yes', v);
+          })() },
+        { label: 'Wireless Presentation',      html: wirelessDisplay },
+        { label: 'Instructor Interactive Computer Monitor', html: (() => {
+            const v = get('interactive computer monitor model and size');
+            return (!v || /^(n\/a|no|none)$/i.test(v)) ? 'No' : titleCase(v);
+          })() },
+        { label: 'Instructor Computer Monitor', html: modelField(get('computer monitor model and size')) },
+        { label: 'Class Capture (Panopto)',    html: 'No' },
+        { label: 'Operating System',           html: (() => {
+            const v = get('pc or mac');
+            if (/imac/i.test(v))     return 'MacOS (Apple iMac)';
+            if (/mac mini/i.test(v)) return 'MacOS (Apple Mac Mini)';
+            return titleCase(v);
+          })() },
+      ],
+      'Classroom Audio': [
+        { label: 'Voice Amplification (Speakers)',        html: (() => {
+            const v = get('number of wall mounted speakers');
+            return (v && v !== '0' && !/^(no|none)$/i.test(v)) ? 'Yes' : 'No';
+          })() },
+        { label: 'Podium Microphone',                     html: modelField(get('podium microphones model')) },
+        { label: 'Ceiling Microphone',                    html: hasCeilingMic ? withModel('Yes', ceilingMicModel) : 'No' },
+        { label: 'Wireless Lavalier Microphone (Clip-on)',html: hasLavalier ? withModel('Yes', lavalierModel) : 'No' },
+        { label: 'Handheld Microphone',                   html: countOrYes(get('number of wireless handheld microphones')) },
+      ],
+      'Accessibility & Environment': [
+        { label: 'Assistive Listening Device',        html: yn(get('assistive listening device')) },
+        { label: 'Environmental control touch panel', html: yn(get('dimmable lighting')) },
+        { label: 'Height adjustable desk/podium',     html: (() => {
+            if (!/^yes/i.test(get('height-adjustable desk/podium'))) return 'No';
+            const model = get('height-adjustable desk/podium model');
+            return model && !/^(n\/a|no|none)$/i.test(model) ? withModel('Yes', model) : 'Yes';
+          })() },
+        { label: 'Stage',                             html: yn(get('stage')) },
+        { label: 'Privacy panel for teacher desk',    html: yn(get('privacy panel for teacher desk')) },
+        { label: 'Windows in classroom',              html: yn(get('windows in classroom')) },
+        { label: 'Door with window',                  html: yn(get('entry door with window')) },
+      ],
+      'Boards': [
+        { label: 'Chalkboards', html: /^yes/i.test(get('chalkboard')) ? '1' : '0' },
+        { label: 'Whiteboards', html: /^yes/i.test(get('whiteboard'))  ? '1' : '0' },
+      ],
+    };
+
+    const highlights = [];
+    if (appleTV)    highlights.push({ icon: 'bi-stars',           label: 'Wireless: Apple TV' });
+    if (kramer)     highlights.push({ icon: 'bi-broadcast',       label: 'Wireless: Kramer' });
+    if (hasAudienceCam)
+                    highlights.push({ icon: 'bi-camera-video',    label: 'Audience Camera' });
+    if (/^yes$/i.test(get('web camera')))
+                    highlights.push({ icon: 'bi-camera-video-fill', label: 'Web Conference Camera' });
+    if (hasLavalier)highlights.push({ icon: 'bi-mic',             label: 'Wireless Lavalier Mic' });
+
+    const instructorPC = (() => {
+      const v = get('pc or mac');
+      if (/imac/i.test(v))     return 'MacOS (Apple iMac)';
+      if (/mac mini/i.test(v)) return 'MacOS (Apple Mac Mini)';
+      return titleCase(v);
+    })();
+
+    return {
+      roomNumber: roomId.toUpperCase(),
+      building: 'Beury Hall',
+      campus: 'Main Campus',
+      capacity: get('capacity'),
+      seatingType: titleCase(get('seating type (tables and chairs, tablet armchairs, auditorium chairs)')),
+      instructorPC,
+      highlights,
+      sections: SECTIONS,
+    };
+  }
+
+  function escHtml(s) {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function render(d) {
+    document.title = `Beury ${d.roomNumber} – CTS Classrooms`;
+    document.getElementById('roomTitle').textContent = `${d.building} ${d.roomNumber}`;
+    document.getElementById('breadcrumbRoom').textContent = d.roomNumber;
+
+    document.getElementById('highlightsWrap').innerHTML = d.highlights
+      .map(h => `<span class="chip"><i class="bi ${h.icon}"></i>${h.label}</span>`)
+      .join('');
+
+    document.getElementById('kfLocation').textContent   = d.building;
+    document.getElementById('kfCampus').textContent     = d.campus;
+    document.getElementById('kfCapacity').textContent   = d.capacity;
+    document.getElementById('kfSeating').textContent    = d.seatingType;
+    document.getElementById('kfInstructor').textContent = d.instructorPC;
+    document.getElementById('kfRecording').textContent  = 'No';
+
+    const acc = document.getElementById('featAcc');
+    acc.innerHTML = Object.entries(d.sections).map(([name, items], i) => {
+      const id = `acc${i + 1}`;
+      const isFirst = i === 0;
+      return `
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button${isFirst ? '' : ' collapsed'}" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#${id}">
+              ${escHtml(name)}
+            </button>
+          </h2>
+          <div id="${id}" class="accordion-collapse collapse${isFirst ? ' show' : ''}">
+            <div class="accordion-body">
+              <div class="row row-cols-1 row-cols-sm-2 g-2">
+                ${items.map(item => `
+                  <div class="col"><div class="border rounded-3 p-2 h-100">
+                    <div class="small text-muted">${item.label}</div>
+                    <div class="fw-semibold mt-1">${item.html}</div>
+                  </div></div>`).join('')}
+              </div>
+            </div>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  function showError() {
+    const main = document.getElementById('mainContent');
+    if (main) main.innerHTML =
+      '<p class="text-muted mt-3">Room not found. <a href="beury.html">Back to Beury rooms</a></p>';
+  }
+})();
+</script>
+</body>
+</html>

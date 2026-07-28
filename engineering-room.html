@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <title>Engineering Room – CTS Classrooms</title>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md navbar-light bg-white border-bottom shadow-sm sticky-top">
+  <div class="container">
+    <a class="navbar-brand fw-semibold" href="index.html">CTS Classrooms</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="mainNav" class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Buildings</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container my-4">
+
+  <nav aria-label="breadcrumb" class="mb-1">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="index.html">Buildings</a></li>
+      <li class="breadcrumb-item"><a href="engineering.html">Engineering</a></li>
+      <li class="breadcrumb-item active" id="breadcrumbRoom"></li>
+    </ol>
+  </nav>
+
+  <h1 class="h4 text-center mb-3" id="roomTitle"></h1>
+
+  <div class="row g-3">
+
+    <aside class="col-12 col-lg-3 order-2 order-lg-1">
+      <div class="detail-sidebar" id="detailSidebar">
+        <div class="text-muted small" id="noPhotosMsg">No photos available.</div>
+      </div>
+    </aside>
+
+    <section class="col-12 col-lg-9 order-1 order-lg-2" id="mainContent">
+
+      <div id="pano-wrap">
+        <span style="font-size:.9rem;">No 360° panorama available</span>
+      </div>
+
+      <div class="d-flex flex-wrap gap-2 my-3" id="highlightsWrap"></div>
+
+      <div class="row g-3 mb-2">
+        <div class="col-12 col-md-6">
+          <div class="p-3 border rounded-3 h-100">
+            <div class="kv-row"><div class="k">Location</div><div class="v" id="kfLocation"></div></div>
+            <div class="kv-row"><div class="k">Campus</div><div class="v" id="kfCampus"></div></div>
+            <div class="kv-row"><div class="k">Capacity</div><div class="v" id="kfCapacity"></div></div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="p-3 border rounded-3 h-100">
+            <div class="kv-row"><div class="k">Seating type</div><div class="v" id="kfSeating"></div></div>
+            <div class="kv-row"><div class="k">Instructor PC</div><div class="v" id="kfInstructor"></div></div>
+            <div class="kv-row"><div class="k">Recording</div><div class="v" id="kfRecording"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion feature-accordion mb-3" id="featAcc"></div>
+
+      <div class="d-flex flex-wrap gap-2 justify-content-end">
+        <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#techModal">
+          Tech support
+        </button>
+      </div>
+
+      <div class="modal fade" id="techModal" tabindex="-1" aria-labelledby="techModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="techModalLabel">Tech Support – Engineering</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p class="text-muted">Tech contact information not yet available.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+<script>
+(function () {
+  const ROOM_IMAGES = {
+    '126': { dir: 'Engineering/1st Floor/126', files: ['AS7A5020.JPG','AS7A5021.JPG','AS7A5022.JPG','AS7A5023.JPG','AS7A5024.JPG','AS7A5025.JPG','AS7A5026.JPG','AS7A5027.JPG','AS7A5028.JPG','AS7A5029.JPG','AS7A5030.JPG','AS7A5031.JPG','AS7A5032.JPG'] },
+    '301a': { dir: 'Engineering/3rd Floor/301A', files: ['AS7A5033.JPG','AS7A5034.JPG','AS7A5035.JPG','AS7A5036.JPG','AS7A5037.JPG','AS7A5038.JPG','AS7A5039.JPG','AS7A5040.JPG','AS7A5041.JPG','AS7A5042.JPG','AS7A5043.JPG','AS7A5044.JPG'] },
+    '308': { dir: 'Engineering/3rd Floor/308', files: ['AS7A5045.JPG','AS7A5046.JPG','AS7A5047.JPG','AS7A5048.JPG','AS7A5049.JPG','AS7A5050.JPG','AS7A5051.JPG','AS7A5052.JPG','AS7A5053.JPG','AS7A5054.JPG','AS7A5055.JPG','AS7A5056.JPG','AS7A5057.JPG'] },
+  };
+
+  function imgSrc(dir, file) {
+    return encodeURI(dir + '/' + file);
+  }
+
+  function setupImages(roomId) {
+    const data = ROOM_IMAGES[roomId.toLowerCase()];
+    if (!data || !data.files.length) return;
+
+    const noPhotosMsg = document.getElementById('noPhotosMsg');
+    if (noPhotosMsg) noPhotosMsg.remove();
+
+    const panoWrap = document.getElementById('pano-wrap');
+    const sidebar  = document.getElementById('detailSidebar');
+
+    const defaultIdx = data.files.length - 1;
+
+    const mainImg = document.createElement('img');
+    mainImg.id = 'mainImg';
+    mainImg.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;';
+    mainImg.src = imgSrc(data.dir, data.files[defaultIdx]);
+    mainImg.alt = '';
+    panoWrap.innerHTML = '';
+    panoWrap.appendChild(mainImg);
+
+    data.files.forEach((file, i) => {
+      const thumb = document.createElement('img');
+      thumb.src = imgSrc(data.dir, file);
+      thumb.alt = '';
+      if (i === defaultIdx) thumb.classList.add('active-thumb');
+      thumb.addEventListener('click', () => {
+        mainImg.src = thumb.src;
+        sidebar.querySelectorAll('img').forEach(t => t.classList.remove('active-thumb'));
+        thumb.classList.add('active-thumb');
+      });
+      sidebar.appendChild(thumb);
+    });
+  }
+
+  const room = new URLSearchParams(location.search).get('room');
+  if (!room) { showError(); return; }
+
+  fetch('classroom_inventory(Engineering).csv')
+    .then(r => { if (!r.ok) throw new Error(); return r.text(); })
+    .then(text => {
+      const { data } = Papa.parse(text, { skipEmptyLines: false });
+      const header = data[0];
+      const col = header.findIndex((h, i) =>
+        i > 0 && h.replace(/^ENGR_0*/i, '').toLowerCase() === room.toLowerCase()
+      );
+      if (col === -1) { showError(); return; }
+
+      const csvMap = new Map();
+      for (const row of data.slice(1)) {
+        const key = (row[0] || '').trim().toLowerCase();
+        if (key && !csvMap.has(key)) csvMap.set(key, (row[col] || '').trim());
+      }
+      const get = k => csvMap.get(k.toLowerCase()) ?? '';
+
+      render(buildData(get, room));
+      setupImages(room);
+    })
+    .catch(showError);
+
+  function titleCase(s) {
+    return s.toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
+  }
+
+  function yn(v) {
+    return /^yes/i.test(v) ? 'Yes' : 'No';
+  }
+
+  // this sheet uses both "N/A" and bare "NA" for blank/absent values
+  function isBlankish(v) {
+    return !v || /^(no|n\/?a|none)$/i.test(v.trim());
+  }
+
+  function withModel(primary, modelStr) {
+    const m = modelStr && !isBlankish(modelStr) ? titleCase(modelStr) : '';
+    return m
+      ? `${primary} &nbsp;<small class="text-muted fw-normal">(${m})</small>`
+      : primary;
+  }
+
+  function modelField(v) {
+    if (isBlankish(v)) return 'No';
+    return withModel('Yes', v);
+  }
+
+  // "number of X" fields in this sheet mix literal YES/NO with actual counts
+  function countOrYes(v) {
+    if (/^yes/i.test(v)) return 'Yes';
+    if (isBlankish(v) || v.trim() === '0') return 'No';
+    const n = parseInt(v, 10);
+    return (!isNaN(n) && n > 0) ? 'Yes' : 'No';
+  }
+
+  function buildData(get, roomId) {
+    const appleTV    = /^yes$/i.test(get('wireless presentation (appletv)'));
+    const kramer     = /^yes$/i.test(get('wireless presentation (kramer)'));
+    const ditto      = /^yes$/i.test(get('wireless presentation (ditto)'));
+
+    const wirelessParts = [];
+    if (appleTV) wirelessParts.push('Apple TV');
+    if (kramer)  wirelessParts.push('Kramer');
+    if (ditto)   wirelessParts.push('DITTO');
+    const wirelessDisplay = wirelessParts.length ? wirelessParts.join(' + ') : 'No';
+
+    const instructorCamModel = get('instructor camera model');
+    const hasInstructorCam = !isBlankish(instructorCamModel);
+
+    const audienceCamModel = get('audience camera model');
+    const hasAudienceCam = !isBlankish(audienceCamModel);
+
+    const ceilingMicModel = get('ceiling microphone model');
+    const hasCeilingMic = !isBlankish(ceilingMicModel);
+
+    const displayModel = get('instructional display model and size');
+    const hasDisplay = !isBlankish(displayModel);
+
+    const interactiveDisplayModel = get('instructional interactive display model and size');
+    const hasInteractiveDisplay = !isBlankish(interactiveDisplayModel);
+
+    const lavalierModel = get('wireless lavalier microphone model');
+    const hasLavalier = !isBlankish(lavalierModel);
+
+    // Recording: this building's sheet actually has real class-capture data
+    // (unlike Tyler/Wachman/Beury, where it's always absent), so surface it
+    // instead of hardcoding "No".
+    const classCaptureFlag  = get('class capture system');
+    const classCaptureModel = get('class capture system model');
+    const hasClassCapture = !isBlankish(classCaptureFlag);
+    const classCaptureDisplay = (() => {
+      if (!hasClassCapture) return 'No';
+      if (!isBlankish(classCaptureModel)) return withModel('Yes', classCaptureModel);
+      return withModel('Yes', classCaptureFlag);
+    })();
+
+    const SECTIONS = {
+      'Instructor Video': [
+        { label: 'Web Conference Camera (PC)', html: yn(get('web camera')) },
+        { label: 'Instructor Camera',          html: hasInstructorCam ? withModel('Yes', instructorCamModel) : 'No' },
+        { label: 'Audience Camera',            html: hasAudienceCam ? withModel('Yes', audienceCamModel) : 'No' },
+        { label: 'Document Camera',            html: modelField(get('document camera')) },
+        { label: 'Projectors',                 html: (() => {
+            const n = get('number of projectors');
+            const m = get('projector model');
+            if (!n || n === '0') return '0';
+            return withModel(n, m);
+          })() },
+        { label: 'Instructor Presentation LED/LCD Display', html: hasDisplay ? withModel('Yes', displayModel) : 'No' },
+        { label: 'Instructor Touchscreen Display',  html: hasInteractiveDisplay ? withModel('Yes', interactiveDisplayModel) : 'No' },
+        { label: 'Wireless Presentation',      html: wirelessDisplay },
+        { label: 'Instructor Interactive Computer Monitor', html: (() => {
+            const v = get('interactive computer monitor model and size');
+            return isBlankish(v) ? 'No' : titleCase(v);
+          })() },
+        { label: 'Instructor Computer Monitor', html: modelField(get('computer monitor model and size')) },
+        { label: 'Class Capture (Panopto)',    html: classCaptureDisplay },
+        { label: 'Operating System',           html: (() => {
+            const v = get('pc or mac');
+            if (/imac/i.test(v))     return 'MacOS (Apple iMac)';
+            if (/mac mini/i.test(v)) return 'MacOS (Apple Mac Mini)';
+            return titleCase(v);
+          })() },
+      ],
+      'Classroom Audio': [
+        { label: 'Voice Amplification (Speakers)',        html: (() => {
+            // this building often runs ceiling speakers instead of wall-mounted ones
+            const wall = get('number of wall mounted speakers');
+            const ceil = get('number of ceiling mounted speakers');
+            const hasWall = wall && wall !== '0' && !/^(no|none)$/i.test(wall);
+            const hasCeil = ceil && ceil !== '0' && !/^(no|none)$/i.test(ceil);
+            return (hasWall || hasCeil) ? 'Yes' : 'No';
+          })() },
+        { label: 'Podium Microphone',                     html: modelField(get('podium microphones model')) },
+        { label: 'Ceiling Microphone',                    html: hasCeilingMic ? withModel('Yes', ceilingMicModel) : 'No' },
+        { label: 'Wireless Lavalier Microphone (Clip-on)',html: hasLavalier ? withModel('Yes', lavalierModel) : 'No' },
+        { label: 'Handheld Microphone',                   html: countOrYes(get('number of wireless handheld microphones')) },
+      ],
+      'Accessibility & Environment': [
+        { label: 'Assistive Listening Device',        html: yn(get('assistive listening device')) },
+        { label: 'Environmental control touch panel', html: yn(get('environmental controls in the touch panel')) },
+        { label: 'Height adjustable desk/podium',     html: (() => {
+            const flag = get('height-adjustable desk/podium');
+            if (!/^yes/i.test(flag)) return 'No';
+            const model = get('height-adjustable desk/podium model');
+            if (!isBlankish(model) && !/^yes$/i.test(model.trim())) return withModel('Yes', model);
+            // preserve caveats like "YES/DOES NOT WORK" instead of showing a bare "Yes"
+            const note = flag.replace(/^yes\/?/i, '').trim();
+            return note ? withModel('Yes', note) : 'Yes';
+          })() },
+        { label: 'Stage',                             html: yn(get('stage')) },
+        { label: 'Privacy panel for teacher desk',    html: yn(get('privacy panel for teacher desk')) },
+        { label: 'Windows in classroom',              html: yn(get('windows in classroom')) },
+        { label: 'Door with window',                  html: yn(get('entry door with window')) },
+      ],
+      'Boards': [
+        { label: 'Chalkboards', html: /^yes/i.test(get('chalkboard')) ? '1' : '0' },
+        { label: 'Whiteboards', html: /^yes/i.test(get('whiteboard'))  ? '1' : '0' },
+      ],
+    };
+
+    const highlights = [];
+    if (appleTV)         highlights.push({ icon: 'bi-stars',           label: 'Wireless: Apple TV' });
+    if (kramer)          highlights.push({ icon: 'bi-broadcast',       label: 'Wireless: Kramer' });
+    if (ditto)            highlights.push({ icon: 'bi-broadcast',       label: 'Wireless: DITTO' });
+    if (hasInstructorCam) highlights.push({ icon: 'bi-camera-video',    label: 'Instructor Camera' });
+    if (hasAudienceCam)   highlights.push({ icon: 'bi-camera-video',    label: 'Audience Camera' });
+    if (/^yes$/i.test(get('web camera')))
+                          highlights.push({ icon: 'bi-camera-video-fill', label: 'Web Conference Camera' });
+    if (hasLavalier)      highlights.push({ icon: 'bi-mic',             label: 'Wireless Lavalier Mic' });
+    if (hasClassCapture)  highlights.push({ icon: 'bi-record-circle',   label: 'Class Capture' });
+
+    const instructorPC = (() => {
+      const v = get('pc or mac');
+      if (/imac/i.test(v))     return 'MacOS (Apple iMac)';
+      if (/mac mini/i.test(v)) return 'MacOS (Apple Mac Mini)';
+      return titleCase(v);
+    })();
+
+    return {
+      roomNumber: roomId.toUpperCase(),
+      building: 'Engineering',
+      campus: 'Main Campus',
+      capacity: get('capacity'),
+      seatingType: titleCase(get('seating type (tables and chairs, tablet armchairs, auditorium chairs)')),
+      instructorPC,
+      recording: classCaptureDisplay,
+      highlights,
+      sections: SECTIONS,
+    };
+  }
+
+  function escHtml(s) {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function render(d) {
+    document.title = `Engineering ${d.roomNumber} – CTS Classrooms`;
+    document.getElementById('roomTitle').textContent = `${d.building} ${d.roomNumber}`;
+    document.getElementById('breadcrumbRoom').textContent = d.roomNumber;
+
+    document.getElementById('highlightsWrap').innerHTML = d.highlights
+      .map(h => `<span class="chip"><i class="bi ${h.icon}"></i>${h.label}</span>`)
+      .join('');
+
+    document.getElementById('kfLocation').textContent   = d.building;
+    document.getElementById('kfCampus').textContent     = d.campus;
+    document.getElementById('kfCapacity').textContent   = d.capacity;
+    document.getElementById('kfSeating').textContent    = d.seatingType;
+    document.getElementById('kfInstructor').textContent = d.instructorPC;
+    document.getElementById('kfRecording').innerHTML    = d.recording;
+
+    const acc = document.getElementById('featAcc');
+    acc.innerHTML = Object.entries(d.sections).map(([name, items], i) => {
+      const id = `acc${i + 1}`;
+      const isFirst = i === 0;
+      return `
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button${isFirst ? '' : ' collapsed'}" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#${id}">
+              ${escHtml(name)}
+            </button>
+          </h2>
+          <div id="${id}" class="accordion-collapse collapse${isFirst ? ' show' : ''}">
+            <div class="accordion-body">
+              <div class="row row-cols-1 row-cols-sm-2 g-2">
+                ${items.map(item => `
+                  <div class="col"><div class="border rounded-3 p-2 h-100">
+                    <div class="small text-muted">${item.label}</div>
+                    <div class="fw-semibold mt-1">${item.html}</div>
+                  </div></div>`).join('')}
+              </div>
+            </div>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  function showError() {
+    const main = document.getElementById('mainContent');
+    if (main) main.innerHTML =
+      '<p class="text-muted mt-3">Room not found. <a href="engineering.html">Back to Engineering rooms</a></p>';
+  }
+})();
+</script>
+</body>
+</html>
