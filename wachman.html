@@ -752,39 +752,94 @@ document.addEventListener('DOMContentLoaded', function () {
     [...visible, ...hidden].forEach(c => grid.appendChild(c));
   }
 
-  const PREVIEW_IMG = {
-    '00009': 'Wachman Hall/Ground Floor/WA009/AS7A4533.JPG',
-    '00010': 'Wachman Hall/Ground Floor/WA010/AS7A4542.JPG',
-    '00011': 'Wachman Hall/Ground Floor/WA011/AS7A4549.JPG',
-    '00015': 'Wachman Hall/Ground Floor/WA0115/AS7A4525.JPG',
-    '00016': 'Wachman Hall/Ground Floor/WA0116/AS7A4518.JPG',
-    '00108': 'Wachman Hall/1st Floor/WA108/AS7A4511.JPG',
-    '00109': 'Wachman Hall/1st Floor/WA109/AS7A4501.JPG',
-    '00113': 'Wachman Hall/1st Floor/WA113/AS7A4491.JPG',
-    '00114': 'Wachman Hall/1st Floor/WA114/AS7A4480.JPG',
-    '00206': 'Wachman Hall/2nd Floor/WA206/AS7A4450.JPG',
-    '00207': 'Wachman Hall/2nd Floor/WA207/AS7A4457.JPG',
-    '00208': 'Wachman Hall/2nd Floor/WA208/AS7A4465.JPG',
-    '00212': 'Wachman Hall/2nd Floor/WA212/AS7A4472.JPG',
-    '00213': 'Wachman Hall/2nd Floor/WA213/AS7A4442.JPG',
-    '00307': 'Wachman Hall/3rd Floor/WA307/AS7A4595.JPG',
-    '00308': 'Wachman Hall/3rd Floor/WA308/AS7A4582.JPG',
-    '00312': 'Wachman Hall/3rd Floor/WA312/AS7A4572.JPG',
-    '00313': 'Wachman Hall/3rd Floor/WA313/AS7A4564.JPG',
-    '00314': 'Wachman Hall/3rd Floor/WA314/AS7A4557.JPG',
-    '00406': 'Wachman Hall/4th Floor/WA406/AS7A4386.JPG',
-    '00407': 'Wachman Hall/4th Floor/WA407/AS7A4376.JPG',
-    '00408': 'Wachman Hall/4th Floor/WA408/AS7A4362.JPG',
-    '00412': 'Wachman Hall/4th Floor/WA412/AS7A4420.JPG',
-    '00413': 'Wachman Hall/4th Floor/WA413/AS7A4408.JPG',
-    '00414': 'Wachman Hall/4th Floor/WA414/AS7A4398.JPG',
+  const ROOM_IMAGES = {
+    '00009': { dir: 'Wachman Hall/Ground Floor/WA009',  files: ['AS7A4526.JPG','AS7A4527.JPG','AS7A4528.JPG','AS7A4529.JPG','AS7A4531.JPG','AS7A4532.JPG','AS7A4533.JPG'] },
+    '00010': { dir: 'Wachman Hall/Ground Floor/WA010',  files: ['AS7A4534.JPG','AS7A4535.JPG','AS7A4536.JPG','AS7A4537.JPG','AS7A4540.JPG','AS7A4541.JPG','AS7A4542.JPG'] },
+    '00011': { dir: 'Wachman Hall/Ground Floor/WA011',  files: ['AS7A4543.JPG','AS7A4544.JPG','AS7A4545.JPG','AS7A4546.JPG','AS7A4547.JPG','AS7A4548.JPG','AS7A4549.JPG'] },
+    '00015': { dir: 'Wachman Hall/Ground Floor/WA0115', files: ['AS7A4519.JPG','AS7A4520.JPG','AS7A4521.JPG','AS7A4522.JPG','AS7A4523.JPG','AS7A4524.JPG','AS7A4525.JPG'] },
+    '00016': { dir: 'Wachman Hall/Ground Floor/WA0116', files: ['AS7A4512.JPG','AS7A4513.JPG','AS7A4514.JPG','AS7A4515.JPG','AS7A4516.JPG','AS7A4517.JPG','AS7A4518.JPG'] },
+    '00108': { dir: 'Wachman Hall/1st Floor/WA108',     files: ['AS7A4503.JPG','AS7A4504.JPG','AS7A4505.JPG','AS7A4506.JPG','AS7A4509.JPG','AS7A4510.JPG','AS7A4511.JPG'] },
+    '00109': { dir: 'Wachman Hall/1st Floor/WA109',     files: ['AS7A4492.JPG','AS7A4493.JPG','AS7A4494.JPG','AS7A4495.JPG','AS7A4497.JPG','AS7A4500.JPG','AS7A4501.JPG'] },
+    '00113': { dir: 'Wachman Hall/1st Floor/WA113',     files: ['AS7A4481.JPG','AS7A4482.JPG','AS7A4484.JPG','AS7A4485.JPG','AS7A4489.JPG','AS7A4490.JPG','AS7A4491.JPG'] },
+    '00114': { dir: 'Wachman Hall/1st Floor/WA114',     files: ['AS7A4473.JPG','AS7A4474.JPG','AS7A4475.JPG','AS7A4476.JPG','AS7A4478.JPG','AS7A4479.JPG','AS7A4480.JPG'] },
+    '00206': { dir: 'Wachman Hall/2nd Floor/WA206',     files: ['AS7A4443.JPG','AS7A4444.JPG','AS7A4445.JPG','AS7A4446.JPG','AS7A4448.JPG','AS7A4449.JPG','AS7A4450.JPG'] },
+    '00207': { dir: 'Wachman Hall/2nd Floor/WA207',     files: ['AS7A4451.JPG','AS7A4452.JPG','AS7A4453.JPG','AS7A4454.JPG','AS7A4455.JPG','AS7A4456.JPG','AS7A4457.JPG'] },
+    '00208': { dir: 'Wachman Hall/2nd Floor/WA208',     files: ['AS7A4458.JPG','AS7A4459.JPG','AS7A4460.JPG','AS7A4461.JPG','AS7A4462.JPG','AS7A4463.JPG','AS7A4464.JPG','AS7A4465.JPG'] },
+    '00212': { dir: 'Wachman Hall/2nd Floor/WA212',     files: ['AS7A4466.JPG','AS7A4467.JPG','AS7A4468.JPG','AS7A4469.JPG','AS7A4470.JPG','AS7A4471.JPG','AS7A4472.JPG'] },
+    '00213': { dir: 'Wachman Hall/2nd Floor/WA213',     files: ['AS7A4436.JPG','AS7A4437.JPG','AS7A4438.JPG','AS7A4439.JPG','AS7A4440.JPG','AS7A4441.JPG','AS7A4442.JPG'] },
+    '00307': { dir: 'Wachman Hall/3rd Floor/WA307',     files: ['AS7A4583.JPG','AS7A4584.JPG','AS7A4585.JPG','AS7A4586.JPG','AS7A4587.JPG','AS7A4588.JPG','AS7A4589.JPG','AS7A4590.JPG','AS7A4591.JPG','AS7A4592.JPG','AS7A4593.JPG','AS7A4594.JPG','AS7A4595.JPG'] },
+    '00308': { dir: 'Wachman Hall/3rd Floor/WA308',     files: ['AS7A4573.JPG','AS7A4574.JPG','AS7A4576.JPG','AS7A4577.JPG','AS7A4578.JPG','AS7A4581.JPG','AS7A4582.JPG'] },
+    '00312': { dir: 'Wachman Hall/3rd Floor/WA312',     files: ['AS7A4565.JPG','AS7A4567.JPG','AS7A4568.JPG','AS7A4569.JPG','AS7A4570.JPG','AS7A4571.JPG','AS7A4572.JPG'] },
+    '00313': { dir: 'Wachman Hall/3rd Floor/WA313',     files: ['AS7A4558.JPG','AS7A4559.JPG','AS7A4560.JPG','AS7A4561.JPG','AS7A4562.JPG','AS7A4563.JPG','AS7A4564.JPG'] },
+    '00314': { dir: 'Wachman Hall/3rd Floor/WA314',     files: ['AS7A4550.JPG','AS7A4551.JPG','AS7A4552.JPG','AS7A4553.JPG','AS7A4555.JPG','AS7A4556.JPG','AS7A4557.JPG'] },
+    '00406': { dir: 'Wachman Hall/4th Floor/WA406',     files: ['AS7A4377.JPG','AS7A4378.JPG','AS7A4380.JPG','AS7A4381.JPG','AS7A4382.JPG','AS7A4384.JPG','AS7A4385.JPG','AS7A4386.JPG'] },
+    '00407': { dir: 'Wachman Hall/4th Floor/WA407',     files: ['AS7A4363.JPG','AS7A4364.JPG','AS7A4365.JPG','AS7A4369.JPG','AS7A4373.JPG','AS7A4374.JPG','AS7A4376.JPG'] },
+    '00408': { dir: 'Wachman Hall/4th Floor/WA408',     files: ['AS7A4354.JPG','AS7A4355.JPG','AS7A4356.JPG','AS7A4357.JPG','AS7A4358.JPG','AS7A4359.JPG','AS7A4360.JPG','AS7A4362.JPG'] },
+    '00412': { dir: 'Wachman Hall/4th Floor/WA412',     files: ['AS7A4409.JPG','AS7A4410.JPG','AS7A4411.JPG','AS7A4413.JPG','AS7A4414.JPG','AS7A4416.JPG','AS7A4417.JPG','AS7A4418.JPG','AS7A4419.JPG','AS7A4420.JPG'] },
+    '00413': { dir: 'Wachman Hall/4th Floor/WA413',     files: ['AS7A4399.JPG','AS7A4400.JPG','AS7A4401.JPG','AS7A4402.JPG','AS7A4404.JPG','AS7A4405.JPG','AS7A4406.JPG','AS7A4407.JPG','AS7A4408.JPG'] },
+    '00414': { dir: 'Wachman Hall/4th Floor/WA414',     files: ['AS7A4387.JPG','AS7A4390.JPG','AS7A4391.JPG','AS7A4392.JPG','AS7A4395.JPG','AS7A4396.JPG','AS7A4397.JPG','AS7A4398.JPG'] },
   };
+
+  function imgSrc(dir, file) {
+    return encodeURI(dir + '/' + file);
+  }
+
+  // each tile turns through its room's photos on drag; a plain click still opens the room
+  const PX_PER_FRAME = 40;
   cards.forEach(c => {
-    const rn  = c.getAttribute('data-room');
-    const src = PREVIEW_IMG[rn];
-    if (!src) return;
+    const rn = c.getAttribute('data-room');
+    const data = ROOM_IMAGES[rn];
     const ratio = c.querySelector('.ratio');
-    if (ratio) ratio.innerHTML = `<img class="img-cover" src="${encodeURI(src)}" alt="Wachman ${rn}">`;
+    if (!data || !data.files.length || !ratio) return;
+
+    const frames = data.files.map(file => imgSrc(data.dir, file));
+    const n = frames.length;
+    ratio.classList.add('spin-360');
+    ratio.innerHTML = `<img class="spin-frame" alt="Wachman ${rn}" draggable="false"><span class="spin-count"></span>`;
+    const img = ratio.querySelector('.spin-frame');
+    const count = ratio.querySelector('.spin-count');
+
+    let index = -1;
+    let startX = null;
+    let startIndex = 0;
+    let moved = false;
+    let preloaded = false;
+
+    function show(i) {
+      const next = ((i % n) + n) % n;
+      if (next === index) return;
+      index = next;
+      img.src = frames[index];
+      count.textContent = `${index + 1} / ${n}`;
+    }
+
+    ratio.addEventListener('pointerdown', e => {
+      e.preventDefault();
+      if (!preloaded) {
+        frames.forEach(src => { new Image().src = src; });
+        preloaded = true;
+      }
+      startX = e.clientX;
+      startIndex = index;
+      moved = false;
+      ratio.setPointerCapture(e.pointerId);
+    });
+
+    ratio.addEventListener('pointermove', e => {
+      if (startX === null) return;
+      if (Math.abs(e.clientX - startX) > 4) moved = true;
+      show(startIndex - Math.round((e.clientX - startX) / PX_PER_FRAME));
+    });
+
+    const endDrag = () => { startX = null; };
+    ratio.addEventListener('pointerup', endDrag);
+    ratio.addEventListener('pointercancel', endDrag);
+
+    ratio.addEventListener('click', e => {
+      if (moved) e.preventDefault();
+    });
+
+    show(0);
   });
 
   apply();
