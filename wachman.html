@@ -780,6 +780,15 @@ document.addEventListener('DOMContentLoaded', function () {
     '00414': { dir: 'Wachman Hall/4th Floor/WA414',     files: ['AS7A4387.JPG','AS7A4390.JPG','AS7A4391.JPG','AS7A4392.JPG','AS7A4395.JPG','AS7A4396.JPG','AS7A4397.JPG','AS7A4398.JPG'] },
   };
 
+  // rooms with a 360 panorama in Wachman Hall/360/<room>.jpg (thumbnails in thumbs/)
+  const PANORAMAS = [
+    '00009','00010','00011','00015','00016',
+    '00108','00109','00113','00114',
+    '00206','00207','00208','00212','00213',
+    '00306','00307','00308','00312','00313','00314',
+    '00406','00407','00408','00412','00413','00414',
+  ];
+
   function imgSrc(dir, file) {
     return encodeURI(dir + '/' + file);
   }
@@ -790,7 +799,14 @@ document.addEventListener('DOMContentLoaded', function () {
     const rn = c.getAttribute('data-room');
     const data = ROOM_IMAGES[rn];
     const ratio = c.querySelector('.ratio');
-    if (!data || !data.files.length || !ratio) return;
+    if (!ratio) return;
+    if (PANORAMAS.includes(rn)) {
+      // the room page opens the full 360 panorama; the tile just previews it
+      ratio.innerHTML = `<img class="img-cover" src="${imgSrc('Wachman Hall/360/thumbs', rn + '.jpg')}" alt="Wachman ${rn}">`
+        + `<span class="tile-360-badge"><i class="bi bi-arrow-repeat"></i> 360°</span>`;
+      return;
+    }
+    if (!data || !data.files.length) return;
 
     const frames = data.files.map(file => imgSrc(data.dir, file));
     const n = frames.length;

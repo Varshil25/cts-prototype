@@ -5,8 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css" rel="stylesheet">
   <link href="style.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
   <title>Wachman Room – CTS Classrooms</title>
 </head>
 <body>
@@ -127,8 +129,42 @@
     '00414': { dir: 'Wachman Hall/4th Floor/WA414',     files: ['AS7A4387.JPG','AS7A4390.JPG','AS7A4391.JPG','AS7A4392.JPG','AS7A4395.JPG','AS7A4396.JPG','AS7A4397.JPG','AS7A4398.JPG'] },
   };
 
+  // equirectangular panoramas from the 360 camera, one per room: Wachman Hall/360/<room>.jpg
+  const PANORAMAS = [
+    '00009','00010','00011','00015','00016',
+    '00108','00109','00113','00114',
+    '00206','00207','00208','00212','00213',
+    '00306','00307','00308','00312','00313','00314',
+    '00406','00407','00408','00412','00413','00414',
+  ];
+
   function imgSrc(dir, file) {
     return encodeURI(dir + '/' + file);
+  }
+
+  function setupPanorama(roomId) {
+    if (!PANORAMAS.includes(roomId) || typeof pannellum === 'undefined') return false;
+
+    const noPhotosMsg = document.getElementById('noPhotosMsg');
+    if (noPhotosMsg) noPhotosMsg.remove();
+
+    // same full-width layout as the photo viewer
+    document.getElementById('detailSidebar').closest('aside').remove();
+    document.getElementById('mainContent').className = 'col-12 order-1';
+
+    const panoWrap = document.getElementById('pano-wrap');
+    panoWrap.innerHTML = '';
+    panoWrap.classList.add('pano-360');
+    pannellum.viewer('pano-wrap', {
+      type: 'equirectangular',
+      panorama: imgSrc('Wachman Hall/360', roomId + '.jpg'),
+      autoLoad: true,
+      autoRotate: -2,
+      hfov: 100,
+      pitch: -10,
+      showFullscreenCtrl: true,
+    });
+    return true;
   }
 
   // 360° view: the room's photos are ordered around the room, so dragging
@@ -227,7 +263,7 @@
       const get = k => csvMap.get(k.toLowerCase()) ?? '';
 
       render(buildData(get, room));
-      setupImages(room);
+      if (!setupPanorama(room)) setupImages(room);
     })
     .catch(showError);
 

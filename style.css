@@ -70,7 +70,7 @@
   position: absolute; width: auto; height: auto; background: rgba(0,0,0,.55); color: #fff; border-radius: 999px;
   padding: .2rem .65rem; font-size: .8rem; pointer-events: none; }
 .spin-360 .spin-badge { top: .6rem; left: .6rem; }
-.spin-360 .spin-count { top: .6rem; right: .6rem; }
+.spin-360 .spin-count { top: .6rem; right: .6rem; left: auto; }
 .spin-360 .spin-hint { bottom: .6rem; left: 50%; transform: translateX(-50%); white-space: nowrap; }
 .spin-360 .spin-nav { position: absolute; top: 50%; transform: translateY(-50%);
   width: 2.5rem; height: 2.5rem; border: 0; border-radius: 50%; background: rgba(0,0,0,.55);
@@ -78,3 +78,6 @@
 .spin-360 .spin-nav:hover, .spin-360 .spin-nav:focus-visible { background: rgba(0,0,0,.8); }
 .spin-360 .spin-nav.prev { left: .6rem; }
 .spin-360 .spin-nav.next { right: .6rem; }
+.ratio > .tile-360-badge { top: .5rem; left: .5rem; width: auto; height: auto;
+  background: rgba(0,0,0,.6); color: #fff; border-radius: 999px; padding: .15rem .55rem; font-size: .75rem; }
+#pano-wrap.pano-360 { display: block; background: #111; aspect-ratio: 16/9; max-height: 75vh; }
