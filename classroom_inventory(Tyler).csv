@@ -1,0 +1,139 @@
+Room Number,TYLER_00121,TYLER_00126,TYLER_0B004,TYLER_0B020,TYLER_0B081,TYLER_0B082,TYLER_0B083,TYLER_0B085,TYLER_0B086,TYLER_0B089
+Room Type,110,110,110,110,110,110,110,110,110,110
+# of Entrances,1,1,2,1,1,1,1,1,1,1
+Owner of Space,,,,,,,,,,
+Capacity,35,36,80,24,42,42,42,49,49,42
+"Seating Type (tables and chairs, tablet armchairs, auditorium chairs)",TABLES AND CHAIRS,TABLES AND CHAIRS,TABLET ARMCHAIRS,TABLES AND CHAIRS,TABLES AND CHAIRS,TABLES AND CHAIRS,TABLES AND CHAIRS,TABLES AND CHAIRS,TABLES AND CHAIRS,TABLES AND CHAIRS
+Tiered seating,,,,,,,,,,
+Flexible seating,,,,,,,,,,
+Furniture installation Date,,,,,,,,,,
+Whiteboard,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES
+Whiteboard installation Date,,,,,,,,,,
+Chalkboard,NO,NO,NO,NO,NO,NO,NO,NO,NO,NO
+Chalkboard installation date,,,,,,,,,,
+Stage,NO,NO,NO,NO,NO,NO,NO,NO,NO,NO
+Stage installation date,,,,,,,,,,
+Height-adjustable desk/podium,NO,NO,NO,NO,YES,YES,YES,NO,NO,YES
+Height-adjustable desk/podium installation date,,,,,,,,,,
+Level 2 podium or Level 3 podium,LEVEL 2,LEVEL 2,LEVEL 2,N/A,LEVEL 3,LEVEL 3,LEVEL 3,LEVEL 2,LEVEL 2,LEVEL 3
+Level 2 podium or Level 3 podium installation date,,,,,,,,,,
+privacy panel for teacher desk,NO,NO,NO,NO,NO,NO,NO,NO,NO,NO
+ADA desk for student/guest,,,,,,,,,,
+ADA desk installation date,,,,,,,,,,
+Number of equipment racks,,,,,,,,,,
+Equipment rack model,,,,,,,,,,
+Equipment rack installation date,,,,,,,,,,
+Other rack equipment,,,"EXTRON HAE 100 4K, DENON AL24 PROCESSING PLUS, POLYCOM SOUNDSTRUCTURE C12",AMX MXA-MPL,,,"COVID YOUR CONNECT COMPANY, MIDDLE ATLANTIC PDX-915R",LUXUL AMS-1208P,MIDDLE ATLANTIC POWER CENTER ,
+Windows in classroom,NO,NO,NO,NO,NO,NO,NO,NO,NO,NO
+Door with window,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES
+Door with key lock or number code lock,8324,8324,97263,8324,KEY LOCK,KEY LOCK,KEY LOCK,5231,5412,KEY LOCK
+Carpet,NO,NO,YES,YES,NO,NO,NO,NO,NO,NO
+Floor Tile,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES
+Dimmable lighting,NO,NO,NO,YES,NO,NO,NO,NO,NO,NO
+Stair lighting,,,,,,,,,,
+Teacher spotlight,,,,,,,,,,
+Drop ceiling,NO,NO,NO,YES,YES,YES,YES,YES,YES,YES
+Exposed ceiling,,,,,,,,,,
+Digital Clock,NO,NO,NO,NO,NO,NO,NO,NO,NO,NO
+Analog Clock,NO,NO,NO,NO,NO,NO,NO,NO,NO,NO
+Room Capacity Sign,NO,NO,NO,NO,NO,NO,NO,NO,NO,NO
+Emergy Response Guide (EGRS),NO,NO,NO,NO,NO,NO,NO,NO,NO,NO
+Classroom Support Sign,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES
+Assistive listening device sign,,,,,,,,,,
+Braille door signs,,,,,,,,,,
+Smoke detector,,,,,,,,,,
+Fire sprinkler,,,,,,,,,,
+Technology,,,,,,,,,,
+Number of Projectors,1,1,1,2,1,1,1,1,1,1
+Projector Model,PANASONIC PT-RZ6LW,PANASONIC PT-RZ6LW,CANON LX-MU800Z,PANASONIC PT-RZ6LW,PANASONIC RZ690 WUXGA,PANASONIC PT-RZ6LW,PANASONIC RZ690 WUXGA,PANASONIC PT-RZ6LW,PANASONIC PT-RZ6LW,PANASONIC PT-RZ6LW
+Projector installation date,,,,,,,,,,
+Number of Computers,,,,,,,,,,
+PC or Mac,IMAC,IMAC,IMAC,MAC MINI,IMAC,IMAC,IMAC,IMAC,IMAC,IMAC
+PC or Mac installation date,,,,,,,,,,
+Number of Displays,,,,,,,,,,
+Display Model and size,,,,,"APPLE IMAC 24 INCH 4.5K RETINA DISPLAY, M1 CHIP, 8-CORE CPU",,"APPLE IMAC 24 INCH 4.5K RETINA DISPLAY, M1 CHIP, 8-CORE CPU",,,
+Display installation date,,,,,,,,,,
+Number of Computer Monitors,,,,,,,,,,
+Computer Monitor Model and size,NO,NEC ,NO,NO,NO,NO,NO,NO,NO,NO
+Computer Monitor installation date,,,,,,,,,,
+Interactive monitor Model and Size,NO,NO,NO,NO,NO,NO,NO,NO,NO,NO
+Interactive monitor installation date,,,,,,,,,,
+Document Camera,NO,NO,NO,NO,NO,NO,NO,NO,NO,NO
+Document Camera installation date,,,,,,,,,,
+Instructor Camera Model,NO,NO,NO,YES,NO,,NO,YES,NO,NO
+Audience Camera Model,YES,YES,NO,YES,YES,,YES,YES,YES,YES
+Instructor Camera installation date,,,,,,,,,,
+Audience Camera installation date,,,,,,,,,,
+Web camera,NO,NO,YES,NO,YES ,,NO,NO,NO,NO
+Web camera installation date,,,,,,,,,,
+USB-C connection,YES,YES,NO,NO,YES,YES,YES,YES,YES,YES
+Is USB-C Connection Powered,,,,,,,,,,
+HDMI Connection,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES
+DVI Connection,NO,NO,NO,NO,NO,,NO,NO,NO,NO
+VGA Connection,NO,NO,NO,NO,NO,,NO,NO,NO,NO
+DisplayPort Connection,,,,,,,,,,
+Number of Touch Panels,,,,,,,,,,
+Touch Panel Model and Size,VARIA-80,VARIA-80,AMX NXD-700VI,VARIA-80,VARIA-80,VARIA-80,VARIA-80,VARIA-80,VARIA-80,VARIA-80
+Touch Panel installation date,,,,,,,,,,
+AMX master model,NX-2200,NX-2200,NI-4100,NX-3200,NX-2200,NX-2200,NX-2200,NX-2200,NX-2200,NX-2200
+AMX master installation date,,,,,,,,,,
+Switcher Model,IN1804 DO,IN1804 DO,EXTRON SW8 HD 4K,DXP HD 4K PLUS SERIES,EXTRON IN1806,EXTRON IN1806,IN1804 DO,DTP3 IN2004 DO,DTP3 IN2004 DO,EXTRON IN1806
+Switcher installation date,,,,,,,,,,
+Number of DTP TX,,,,,,,,,,
+DTP TX Model,XPA U 1002,XPA U 1002,DTP HDMI 230 TX,N/A,EXTRON USB-C HD 101,EXTRON USB-C HD 101,N/A,N/A,N/A,EXTRON USB C HD 101
+Number of DTP RX,,,,,,,,,,
+DTP RX Model,XPA U 1002,XPA U 1002,DA6 HD 4K + DA4 HD 4K,N/A,EXTRON HDMI 230 RX,EXTRON HDMI 230 RX,N/A,N/A,N/A,EXTRON DTP HDMI 230 RX
+DTP TX RX installation date,,,,,,,,,,
+"Wireless Presentation (AppleTV, Kramer, Screenbeam)",APPLETV,APPLETV,APPLETV,APPLETV,APPLETV,APPLETV,APPLETV,APPLETV,APPLETV,APPLETV
+Wireless Presentation installation date,,,,,,,,,,
+Number of projection screens,,,,,,,,,,
+Powered Projection Screen and Model,"MANUAL, DALITE MODEL C","MANUAL, DALITE MODEL C",POWERED SCREEN,POWERED SCREEN(S) [2],"POWERED, DALITE COSMOPOLITAN ",POWERED,DALITE COSMOPOLITAN,"MANUAL, DALITE MODEL C","MANUAL, DALITE MODEL C","MANUAL, MODEL C"
+Manual Projection Screen and Model,,,,,,,,,,
+Projection Screen installation date,,,,,,,,,,
+Environmental Controls in the touch panel,,,,,,,,,,
+Outlet for Portable Devices,,,,,,,,,,
+Surge Protector Model,,,,,,,,,,
+Surge Protector installation date,,,,,,,,,,
+Number of computer-video connector plates,,,,,,,,,,
+Computer-video connector plates Model,,,,,,,,,,
+Computer-video connector plate installation date,,,,,,,,,,
+Audio,,,,,,,,,,
+Podium microphone,,,,,,,,,,
+Podium microphone model,NO,NO,SHURE MICROFLEX,NO,SHURE MICROFLEX,SHURE MICROFLEX,SHURE MICROFLEX,SHURE MICROFLEX,SHURE MICROFLEX,SHURE MICROFLEX
+Podium microphone installation date,,,,,,,,,,
+Wireless Lavalier microphone,NO,NO,SHURE ULX,SHURE QLXD1,NO,NO,NO,NO,NO,NO
+Number of Wireless Lavalier microphones,,,,,,,,,,
+Wireless Lavalier microphone model,,,,,,,,,,
+Wireless Lavalier microphone installation date,,,,,,,,,,
+Number of Wireless Handheld microphones,,,,,,,,,,
+Wireless Handheld microphone model,,,,,,,,,,
+Wireless Handheld microphone installation date,,,,,,,,,,
+Number of Wireless microphone receivers,,,,,,,,,,
+Wireless microphone receiver model,NO,NO,SHURE ULXP4 (8),SHURE QLXD4,NO,NO,NO,NO,NO,NO
+Wireless receiver installation date,,,,,,,,,,
+Number of Ceiling microphones,,,,,,,,,,
+Ceiling Microphone Model,"YES, SNOWBALL","YES, SNOWBALL",NO,"YES, CLEARONE (HANGING)",CLEARONE,CLEARONE,NO,CLEARONE,CLEARONE,CLEARONE
+Number of Amplifiers,,,,,,,,,,
+Amplifier,XPA U 1002,XPA U 1002,EXTRON XPA 2001,EXTRON XPA 2003C,EXTRON XPA U 1004 SB,EXTRON XPA U 1004 SB,EXTRON UPA 1002 SERIES,EXTRON UPA 1002 SERIES,EXTRON UPA 1002 SERIES,EXTRON UPA 1002 SERIES
+Amplifier installation date,,,,,,,,,,
+Number of Ceiling mounted speakers,NO,NO,NO,NO,NO,NO,NO,NO,NO,NO
+Ceiling mounted speakers model,,,,,,,,,,
+Ceiling speaker installation date,,,,,,,,,,
+Number of Wall mounted Speakers,YES,YES ,YES,YES,YES,YES,YES,YES,YES,YES
+Wall mounted speaker model,,,,,,,,,,
+Wall-mounted speaker installation date,,,,,,,,,,
+AV Bridge Model,NO,NO,VADDIO AV BRIDGE ,VADDIO AV BRIDGE MINI,VADDIO AV BRIDGE MINI,VADDIO AV BRIDGE MINI,VADDIO AV BRIDGE MINI,CLEARONE CONVERGE PRO-2,CLEARONE CONVERGE PRO-2,CLEARONE CONVERGE PRO-2
+AV Bridge installation date,,,,,,,,,,
+AV Bridge Laptop Connection,NO,NO,N/A,NO,NO,NO,NO,NO,NO,NO
+Assistive listening device,,,,,,,,,,
+Assistive Listening Device Transmitter Model,,,,,,,,,,
+Number of assistive listening device receivers,,,,,,,,,,
+Assistive listening device receiver model,,,,,,,,,,
+Number of assistive listening device ear buds,,,,,,,,,,
+Number of assistive listening device headset,,,,,,,,,,
+Assistive Listening Device Package installation date,,,,,,,,,,
+"Wireless Access Point (Aruba, etc)",NO,NO,ARUBA,ARUBA,ARUBA,NO,ARUBA,ARUBA,NO,NO
+Wireless Access Point installation date,,,,,,,,,,
+Managed PoE Switch,,,,,,,,,,
+Managed PoE Switch installation date,,,,,,,,,,
+Booking URL: (25 Live),HTTPS://25LIVE.COLLEGENET.COM/PRO/TEMPLE#!/HOME/LOCATION/1037/DETAILS,HTTPS://25LIVE.COLLEGENET.COM/PRO/TEMPLE#!/HOME/LOCATION/1038/DETAILS,HTTPS://25LIVE.COLLEGENET.COM/PRO/TEMPLE#!/HOME/LOCATION/1090/DETAILS,,HTTPS://25LIVE.COLLEGENET.COM/PRO/TEMPLE#!/HOME/LOCATION/1094/DETAILS,HTTPS://25LIVE.COLLEGENET.COM/PRO/TEMPLE#!/HOME/LOCATION/1095/DETAILS,HTTPS://25LIVE.COLLEGENET.COM/PRO/TEMPLE#!/HOME/LOCATION/1096/DETAILS,HTTPS://25LIVE.COLLEGENET.COM/PRO/TEMPLE#!/HOME/LOCATION/1097/DETAILS,HTTPS://25LIVE.COLLEGENET.COM/PRO/TEMPLE#!/HOME/LOCATION/1098/DETAILS,HTTPS://25LIVE.COLLEGENET.COM/PRO/TEMPLE#!/HOME/LOCATION/1099/DETAILS

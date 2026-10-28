@@ -1,0 +1,215 @@
+Room Number,SERC_0108A ,SERC_0108B,SERC_0110A,SERC_0110B,SERC_00116
+Classroom Classification Number,CLASSROOM,CLASSROOM,LECTURE HALL ,LECTURE HALL,LECTURE HALL
+Number of Entrances,2,2,,,
+Owner of Space,ITS/ Provost,ITS/ Provost,ITS/ Provost,ITS/ Provost,ITS/ Provost
+Capacity,72,72,193,193,193
+"Seating Type (tables and chairs, tablet armchairs, auditorium chairs)",TABLES AND CHAIRS,TABLES AND CHAIRS,TABLET ARMCHAIRS,TABLET ARMCHAIRS,TABLET ARMCHAIRS
+Tiered seating,NO,NO,YES,YES,YES
+Flexible seating,YES,YES ,NO,NO,NO
+Instructor stool,NO,NO,YES,YES,
+Classroom furniture installation date,41852,41852,41852,41852,41852
+Whiteboard,YES,YES,NO,NO,NO
+Whiteboard installation Date,41852,41852,41852,41852,41852
+Chalkboard,NO,NO,YES,YES,YES
+Chalkboard installation date,41852,41852,41852,41852,41852
+Stage,NO,NO,YES,YES,YES
+Stage installation date,N/A,N/A,N/A,N/A,N/A
+Height-adjustable desk/podium,YES,YES,NO,NO,NO
+Height-adjustable desk/podium model,Herman Miller 1B6SK2,Herman Miller 1B6SK2,NO,NO,NO
+Height-adjustable desk/podium installation date,41852,41852,41852,41852,41852
+Level 1 podium,NO,NO,NO,NO,NO
+Level 1 podium installation date,N/A,N/A,N/A,N/A,N/A
+Level 2 podium,NO,NO,NO,NO,NO
+Level 2 podium installation date,N/A,N/A,N/A,N/A,N/A
+Level 3 podium,NO,NO,NO,NO,NO
+Level 3 podium installation date,N/A,N/A,N/A,N/A,N/A
+Privacy panel for teacher desk,YES,YES ,NO,NO,NO
+ADA desk for student/guest,NO,NO,NO,NO,NO
+ADA desk for student/guest model,N/A,N/A,N/A,N/A,N/A
+ADA desk installation date,N/A,N/A,N/A,N/A,N/A
+Number of equipment racks,1,1,1,1,1
+Equipment rack model,N/A,N/A,N/A,N/A,N/A
+Equipment rack installation date,41852,41852,41852,41852,41852
+Windows in classroom,YES,YES ,YES,YES,YES
+Entry door with window,NO,NO,NO,NO,NO
+Entry door with key lock,YES,YES ,YES,YES,YES
+Entry door with mechanical push-button lock,NO,NO,NO,NO,NO
+Entry door with number key pad lock,NO,NO,NO,NO,NO
+Carpet,YES,YES ,YES,YES,YES
+Vinyl Floor Tile,NO,NO,NO,NO,NO
+Dimmable lighting,YES,YES ,YES,YES,YES
+Stair lighting,NO,NO,NO,NO,
+Teacher spotlight,NO,NO,NO,NO,
+Drop ceiling,YES,YES ,YES,YES,YES
+Exposed ceiling,NO,NO,NO,NO,NO
+Digital Clock,NO,NO,NO,NO,NO
+Analog Clock,NO,NO,NO,NO,NO
+Room Capacity Sign,YES,YES ,YES,YES,YES
+Emergy Response Guide (EGRS),YES,YES ,YES,YES,YES
+Classroom Support Sign,YES,YES ,YES,YES,YES
+Assistive listening device sign,NO,NO,NO,NO,
+Braille door signs,YES,YES,YES,YES,YES
+Number of fire alarm speaker strobe,2,2,4,4,
+Number of standard fire detectors,0,0,0,0,
+Fire sprinkler system,YES,YES ,YES,YES,YES
+Fire extinguisher,NO,NO,YES,YES,
+Security Alarm Panel,NO,NO,YES,YES,
+Active Security Alarm Panel,NO,NO,YES,YES,
+Video Technology,,,,,
+Number of Projectors,1,1,1,1,2
+Projector Model,NEC PA653UL,NEC PA653UL,PANASONIC  PT-RZ120 AZ120 WUXGA,PANASONIC  PT-RZ120 AZ120 WUXGA,PANASONIC  PT-RZ120 AZ120 WUXGA
+Projector installation date,,,,,
+Number of Computers,1,1,1,1,1
+PC or Mac,PC,PC,PC,PC,PC
+PC or Mac installation date,,,,,
+Number of Instructional Displays,4,4,,,
+Instructional Display Model and size,NEC E705,NEC E705,,,
+Instructional Display installation date,,,N/A,N/A,N/A
+Number of Instructional Interactive Displays,0,0,0,0,0
+Instructional Interactive Display Model and size,N/A,N/A,N/A,N/A,N/A
+Instructional Interactive Display Installation Date,N/A,N/A,N/A,N/A,N/A
+Number of Computer Monitors,1,1,1,1,1
+Computer Monitor Model and size,DELL U2417H,DELL U2417H,DELL P24H18T,DELL P24H18T,DELL P24H18T
+Computer Monitor installation date,,,,,
+Interactive computer monitor Model and Size,N/A,N/A,N/A,N/A,N/A
+Interactive computer monitor installation date,N/A,N/A,N/A,N/A,N/A
+Document Camera,NO,NO,YES,YES,N/A
+Document Camera installation date,N/A,N/A,41852,41852,N/A
+Instructor Camera Model,N/A,N/A,N/A,N/A,N/A
+Instructor Camera installation date,N/A,N/A,N/A,N/A,N/A
+Audience Camera Model,N/A,N/A,N/A,N/A,N/A
+Audience Camera installation date,N/A,N/A,N/A,N/A,N/A
+Web camera,YES,YES ,NO,NO,YES
+Web camera installation date,N/A,N/A,N/A,N/A,N/A
+USB-C connection,NO,NO,NO,NO,YES
+Powered USB-C Connection,NO,NO,NO,NO,
+Powered USB-C device model,NO,NO,N/A,N/A,
+HDMI Connection,YES,YES ,YES,YES,YES
+DVI Connection,NO,NO,NO,NO,NO
+VGA Connection,YES,YES,YES,YES,YES
+DisplayPort Connection,NO,NO,NO,NO,NO
+Number of Touch Panels,3,3,2,2,
+Touch Panel Model and Size,AMX MSD 1000I,AMX MSD 1000I,AMX MSD 1000I,AMX MSD 1000I,AMX FG2265-05
+Touch Panel installation date,,,,,
+AMX master model,,,,,
+AMX master installation date,,,,,
+Switcher Model,,,,,
+Switcher installation date,,,,,
+Number of DTP TX,,,,,
+DTP TX Model,,,,,
+Number of DTP RX,,,,,
+DTP RX Model,,,,,
+DTP TX RX installation date,,,,,
+Number of video distribution amps,,,,,
+Distribution amplifier model,,,,,
+Distribution amplifier installation date,,,,,
+Environmental Controls in the touch panel,YES,YES,YES,YES,YES
+Wireless Presentation (AppleTV),YES,YES,YES,YES,
+Apple TV installation date,N/A,N/A,N/A,N/A,N/A
+Wireless Presentation (Kramer),YES,YES,NO,NO,
+Kramer installation date,N/A,N/A,N/A,N/A,
+Wireless Presentation (Screenbeam),NO,NO,NO,NO,NO
+Screenbeam Installation date,N/A,N/A,N/A,N/A,N/A
+Wireless Presentation (DITTO),,,,,
+Number of manual projection screens,0,0,0,0,0
+Manual Projection Screen and Model,N/A,N/A,N/A,N/A,N/A
+Manual projection screen installation date,N/A,N/A,N/A,N/A,N/A
+Number of powered projection screens,2,2,1,1,1
+Powered projection screen model and size,N/A,N/A,N/A,N/A,N/A
+Powered projection screen installation date,41852,41852,41852,41852,41852
+Outlet for Portable Devices,YES,YES,YES,YES,YES
+Number of surge protectors,,,,,
+Number of advanced surge protectors,,,,,
+Advanced surge protector model,,,,,
+Advanced surge protector installation date,,,,,
+Number of standard surge protectors,,,,,
+Number of computer-video connector plates,5,5,1,1,
+Computer-video connector plates Model,AMX FG-1010-320-BL,AMX FG-1010-320-BL,Extron Cable Cubby 300,Extron Cable Cubby 300,
+Computer-video connector plate installation date,41852,41852,41852,41852,
+Class Capture System,,,,,
+Class Capture System Model,,,,,
+Class Capture System Installation Date,,,,,
+Audio Technology,,,,,
+Number of podium microphones,0,0,1,1,
+Podium microphones model,N/A,N/A,SHURE,SHURE,SHURE
+Podium microphone installation date,N/A,N/A,41852,41852,41852
+Number of Wireless Lavalier microphones,,,,,
+Wireless Lavalier microphone model,,,,,
+Wireless Lavalier microphone installation date,,,,,
+Number of Wireless Handheld microphones,,,,,
+Wireless Handheld microphone model,,,,,
+Wireless Handheld microphone installation date,,,,,
+Number of Wireless microphone receivers,,,4,4,
+Wireless microphone receiver model,,,,,
+Wireless receiver installation date,,,41852,41852,
+Number of Ceiling microphones,0,0,0,0,0
+Ceiling Microphone Model,N/A,N/A,N/A,N/A,N/A
+Number of Power Amplifiers,,,,,
+Power Amplifier model,,,,,
+Power Amplifier installation date,,,,,
+Number of audio DSP's,,,,,
+Audio DSP model,,,,,
+Audio DSP installation date,,,,,
+Number of audio mixer/amplifiers,,,,,
+Audio mixer/amplifiers model,,,,,
+Audio mixer/amplifier installation date,,,,,
+Number of Ceiling mounted speakers,4,4,8,8,
+Ceiling mounted speakers model,N/A,N/A,N/A,N/A,N/A
+Ceiling speaker installation date,41852,41852,41852,41852,41852
+Number of Wall mounted Speakers,0,0,4,4,
+Wall mounted speaker model,N/A,N/A,JBL,JBL,
+Wall-mounted speaker installation date,N/A,N/A,41852,41852,41852
+AV Bridge Model,,,,,
+AV Bridge installation date,,,,,
+AV Bridge Laptop Connection,,,,,
+Assistive listening device,,,,,
+Assistive Listening Device Transmitter Model,,,,,
+Number of assistive listening device receivers,,,,,
+Assistive listening device receiver model,,,,,
+Number of assistive listening device ear buds,,,,,
+Number of assistive listening device headset,,,,,
+Assistive Listening Device Package installation date,,,,,
+Telecom Data,,,,,
+Number of Wireless Access Points,1,1,3,3,
+"Wireless Access Point (Aruba, etc)",ARUBA,,ARUBA,ARUBA,
+Wireless Access Point installation date,N/A,,,,
+Managed PoE Switch,,,,,
+Managed PoE Switch installation date,,,,,
+Ethernet Closet ID,024-01A,024-01A,024-01A,024-01A,
+Master Controller Jack #,,,,,
+Master Controller MAC Address,N/A,,,,
+Master Controller IP Address,10.56.64.11,,10.56.64.36,,
+Touch Panel Jack #,90,,,,
+Touch Panel MAC Address,,,,,
+Touch Panel IP Address,10.56.64.14,,10.56.64.39,,
+Computer Jack #,92,,,,
+Computer MAC Address,,,,,
+Computer IP Address,,,,,
+Laptop Jack#,N/A,,,,
+Wireless Access Point Jack #,94,,"41,42,43",,
+Wireless Access Point Mac Address,N/A,,,,
+Wireless Access Point IP Address,N/A,,DENON BLUERAY PLAYER,,
+Apple TV Jack #,,,,,
+Apple TV MAC Address,,,N/A,N/A,
+Apple TV IP Address,,,N/A,N/A,
+Kramer Jack #,,,N/A,N/A,
+Kramer MAC Address,,,N/A,N/A,
+Kramer IP Address,,,N/A,N/A,
+Kramer Model,,,N/A,N/A,
+Screenbeam Jack Number,N/A,N/A,N/A,N/A,N/A
+Screenbeam MAC Address,N/A,N/A,N/A,N/A,N/A
+Screenbeam IP Address,N/A,N/A,N/A,N/A,N/A
+Class Capture System Jack Number,,,,,
+Audio DSP Jack Number,,,,,
+Department FOPAL,,,,,
+Department Name,,,,,
+Inactive Telephone,,,,,
+Active Telephone,,,,,
+Additional Ports,143,,,,
+Additional Ports,144,,,,
+Additional Ports,,,,,
+Additional Ports,,,,,
+Additional Ports,,,,,
+Additional Ports,,,,,
+Additional Ports,,,,,
+Additional Ports,,,,,

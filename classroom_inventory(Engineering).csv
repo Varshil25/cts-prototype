@@ -1,0 +1,211 @@
+Room Number,ENGR_00126,ENGR_0301A,ENGR_00308
+Classroom Classification Number,110,110,110
+Number of Entrances,2,1,1
+Owner of Space,ITS/ Provost,ITS/ Provost,ITS/ Provost
+Capacity,152,32,44
+"Seating Type (tables and chairs, tablet armchairs, auditorium chairs)",STADIUM SEATING,TABLES AND CHAIRS,TABLES AND CHAIRS
+Tiered seating,YES,NO,NO
+Flexible seating,NO,YES,NO
+Instructor stool,YES,YES,YES
+Classroom furniture installation date,N/A,N/A,N/A
+Whiteboard,YES,YES,YES
+Whiteboard installation Date,N/A,N/A,N/A
+Chalkboard,NO,NO,NO
+Chalkboard installation date,N/A,N/A,N/A
+Stage,YES,NO,NO
+Stage installation date,N/A,N/A,N/A
+Height-adjustable desk/podium,NO,YES/DOES NOT WORK,NO
+Height-adjustable desk/podium model,N/A,N/A,YES
+Height-adjustable desk/podium installation date,N/A,N/A,N/A
+Level 1 podium,YES,NO,NO
+Level 1 podium installation date,N/A,N/A,N/A
+Level 2 podium,NO,NO,YES
+Level 2 podium installation date,N/A,N/A,N/A
+Level 3 podium,YES,NO,NO
+Level 3 podium installation date,N/A,N/A,N/A
+Privacy panel for teacher desk,NA,NO,YES
+ADA desk for student/guest,YES,NO,NO
+ADA desk for student/guest model,N/A,N/A,N/A
+ADA desk installation date,N/A,N/A,N/A
+Number of equipment racks,1,1,0
+Equipment rack model,N/A,N/A,N/A
+Equipment rack installation date,N/A,N/A,N/A
+Windows in classroom,NO,NO,YES
+Entry door with window,NO,YES,YES
+Entry door with key lock,YES,YES,YES
+Entry door with mechanical push-button lock,NO,YES,NO
+Entry door with number key pad lock,NO,NO,NO
+Carpet,YES,YES,YES
+Vinyl Floor Tile,NO,NO,NO
+Dimmable lighting,YES,YES,NO
+Stair lighting,NO,NO,NO
+Teacher spotlight,NO,NO,NO
+Drop ceiling,YES,YES,YES
+Exposed ceiling,NO,NO,NO
+Digital Clock,YES,NO,NO
+Analog Clock,NO,NO,NO
+Room Capacity Sign,NO,NO,NO
+Emergy Response Guide (EGRS),NO,NO,NO
+Classroom Support Sign,YES,NO,NO
+Assistive listening device sign,NO,NO,NO
+Braille door signs,YES,YES,NO
+Number of fire alarm speaker strobe,2,1,2
+Number of standard fire detectors,4,1,2
+Fire sprinkler system,YES,YES,YES
+Fire extinguisher,NO,NO,NO
+Security Alarm Panel,YES,NO,NO
+Active Security Alarm Panel,NO,NO,NO
+Video Technology,,,
+Number of Projectors,1,2,1
+Projector Model,PANASONIC PT-MZ11K,EPSON BRIGHT LINK 595WI,EPSON POWERLITE L510U
+Projector installation date,N/A,N/A,N/A
+Number of Computers,1,1,1
+PC or Mac,PC,PC,PC
+PC or Mac installation date,46259,N/A,N/A
+Number of Instructional Displays,0,3,0
+Instructional Display Model and size,N/A,SHARP LC-60LE660U,N/A
+Instructional Display installation date,N/A,N/A,N/A
+Number of Instructional Interactive Displays,0,2,0
+Instructional Interactive Display Model and size,N/A,EPSON BRIGHT LINK 595WI,N/A
+Instructional Interactive Display Installation Date,N/A,N/A,N/A
+Number of Computer Monitors,1,1,1
+Computer Monitor Model and size,DELL P2417H,DELL U2412MB,SMART SP524
+Computer Monitor installation date,46259,N/A,N/A
+Interactive computer monitor Model and Size,N/A,N/A,SMART SP524
+Interactive computer monitor installation date,N/A,N/A,N/A
+Document Camera,N/A,NO,NO
+Document Camera installation date,N/A,N/A,N/A
+Instructor Camera Model,VADDIO,VADDIO ROBOSHOT 12,VADDIO ROBOSHOT 12
+Instructor Camera installation date,46259,N/A,N/A
+Audience Camera Model,NA,NO,N/A
+Audience Camera installation date,N/A,N/A,N/A
+Web camera,NO,NO,NO
+Web camera installation date,N/A,N/A,N/A
+USB-C connection,YES,YES,NO
+Powered USB-C Connection,NO,N/A,NO
+Powered USB-C device model,NO,N/A,N/A
+HDMI Connection,NO,YES,YES
+DVI Connection,NO,NO,NO
+VGA Connection,,YES,YES
+DisplayPort Connection,,NO,NO
+Number of Touch Panels,1,1,1
+Touch Panel Model and Size,VARIA-100,MST-701i,MST-701i
+Touch Panel installation date,46259,N/A,N/A
+AMX master model,DVX 2265 4K,DVX-2255HD-T,DVX-2255HD-SP
+AMX master installation date,46259,N/A,N/A
+Switcher Model,AMX DVX 2265 4K,DVX-2255HD-T,AMX DXLINK
+Switcher installation date,46259,N/A,DVX-2255HD-SP
+Number of DTP TX,1,0,1
+DTP TX Model,AMX DXLINK  DX-TX 4K60,N/A,AMX DXLINK
+Number of DTP RX,1,0,1
+DTP RX Model,AMX DXLINK DX-RX 4K60,N/A,N/A
+DTP TX RX installation date,46259,N/A,N/A
+Number of video distribution amps,0,2,0
+Distribution amplifier model,N/A,EXTRON DTP HD DA4; CRESTRON HD-DA-2,N/A
+Distribution amplifier installation date,N/A,N/A,N/A
+Environmental Controls in the touch panel,YES,YES,YES
+Wireless Presentation (AppleTV),YES,YES,NO
+Apple TV installation date,46259,N/A,N/A
+Wireless Presentation (Kramer),NO,YES,YES
+Kramer installation date,N/A,N/A,N/A
+Wireless Presentation (DITTO),NO,YES,NO
+DITTO Installation date,N/A,N/A,N/A
+Number of manual projection screens,0,0,0
+Manual Projection Screen and Model,N/A,N/A,N/A
+Manual projection screen installation date,N/A,N/A,N/A
+Number of powered projection screens,1,0,1
+Powered projection screen model and size,N/A,N/A,DRAPER ACLV-40-878346
+Powered projection screen installation date,46259,N/A,43313
+Outlet for Portable Devices,YES,YES,YES
+Number of surge protectors,4,2,1
+Number of advanced surge protectors,1,0,0
+Advanced surge protector model,SURGE X SX1115-RT,N/A,N/A
+Advanced surge protector installation date,46259,N/A,N/A
+Number of standard surge protectors,3,2,1
+Number of computer-video connector plates,1,1,0
+Computer-video connector plates Model,N/A,AMX PLATE,N/A
+Computer-video connector plate installation date,46259,N/A,N/A
+Class Capture System,,YES,ECHO
+Class Capture System Model,,PANAPTO MAEVEX 6020,N/A
+Class Capture System Installation Date,,N/A,N/A
+Audio Technology,,,
+Number of podium microphones,2,1,1
+Podium microphones model,SHURE 184,MXL AC-404USB,MXL AC-404USB
+Podium microphone installation date,46259,N/A,N/A
+Number of Wireless Lavalier microphones,1,1,0
+Wireless Lavalier microphone model,SLXD1,REVOLABS 01-HDEXEMC-11,N/A
+Wireless Lavalier microphone installation date,,N/A,N/A
+Number of Wireless Handheld microphones,1,0,NA
+Wireless Handheld microphone model,SM58,N/A,NO
+Wireless Handheld microphone installation date,,N/A,N/A
+Number of Wireless microphone receivers,2,0,NA
+Wireless microphone receiver model,SLXD4D,NA,NA
+Wireless receiver installation date,46259,N/A,N/A
+Number of Ceiling microphones,4,0,0
+Ceiling Microphone Model,,N/A,N/A
+Number of Power Amplifiers,2,1,1
+Power Amplifier model,QSC RMX 1450 TOA P-912MK2,BOSE ZA 190-HZ ZONE,BOSE ZA 190-HZ ZONE
+Power Amplifier installation date,46259,N/A,N/A
+Number of audio DSP's,2,1,1
+Audio DSP model,BIAMP TESIRA FORTE AVB CI,BIAMP NEXIA CS,BIAMP NEXIA CS
+Audio DSP installation date,46259,N/A,N/A
+Number of audio mixer/amplifiers,0,0,0
+Audio mixer/amplifiers model,N/A,N/A,N/A
+Audio mixer/amplifier installation date,N/A,N/A,N/A
+Number of Ceiling mounted speakers,6,6,6
+Ceiling mounted speakers model,N/A,BOSE,BOSE
+Ceiling speaker installation date,46259,N/A,N/A
+Number of Wall mounted Speakers,2,0,0
+Wall mounted speaker model,JBL CONTROL 30,N/A,N/A
+Wall-mounted speaker installation date,46259,N/A,N/A
+AV Bridge Model,VADDIO AV BRIDGE MINI ,VADDIO QUICK CONNECT USB,VADDIO QUICK CONNECT USB
+AV Bridge installation date,46259,N/A,N/A
+AV Bridge Laptop Connection,NO,NO,NO
+Assistive listening device,YES,NO,NO
+Assistive Listening Device Transmitter Model,LISTEN LT-803 FM ,N/A,N/A
+Number of assistive listening device receivers,6,0,0
+Assistive listening device receiver model,LR-300-072,N/A,N/A
+Number of assistive listening device ear buds,6,N/A,N/A
+Number of assistive listening device headset,0,N/A,N/A
+Assistive Listening Device Package installation date,46259,N/A,N/A
+Telecom Data,,,
+Number of Wireless Access Points,2,1,1
+"Wireless Access Point (Aruba, etc)",ARUBA,ARUBA,ARUBA
+Wireless Access Point installation date,N/A,N/A,N/A
+Managed PoE Switch,AMX NXA-ENET8-2POE,NO,N/A
+Managed PoE Switch installation date,46259,N/A,N/A
+Ethernet Closet ID,014-BDF,014-03A,014-03A
+Master Controller Jack #,145,366,375
+Master Controller MAC Address,,,
+Master Controller IP Address,10.56.33.152,10.56.33.25,10.56.33.29
+Touch Panel Jack #,1-7,367,376
+Touch Panel MAC Address,00:60:9F:AB:68:7A,,
+Touch Panel IP Address,10.56.33.151,10.56.33.26,10.56.33.30
+Computer Jack #,1-8,369,381
+Computer MAC Address,30:D0:42:F2:69:DC,,
+Computer IP Address,129.32.61.73,,
+Laptop Jack#,NO,,377
+Wireless Access Point Jack #,36,373,397
+Wireless Access Point Mac Address,,9C:8C:D8:CF:EE:B5,9C:8C:D8:CF:B7:C2
+Wireless Access Point IP Address,,N/A,N/A
+Apple TV Jack #,110,371,N/A
+Apple TV MAC Address,C8:D0:83:DE:75:75,N/A,N/A
+Apple TV IP Address,10.96.70.131,N/A,N/A
+Kramer Jack #,N/A,N/A,380
+Kramer MAC Address,N/A,N/A,N/A
+Kramer IP Address,N/A,N/A,N/A
+Kramer Model,N/A,N/A,N/A
+Class Capture System Jack Number,,370,379
+Audio DSP Jack Number,,368,378
+Department FOPAL,,,
+Department Name,,,
+Inactive Telephone,NO,,
+Active Telephone,YES,,
+Additional Ports,,372,289
+Additional Ports,,Projector 1,290
+Additional Ports,,Projector 2,291
+Additional Ports,,Display 1,292
+Additional Ports,,Display 2,293
+Additional Ports,,Display 3,
+Additional Ports,,Vaddio Camera,
+Additional Ports,,2 additional signals,
